@@ -1,16 +1,76 @@
-# XXPC 20XX
+# RUPC 2017 (仮)
 
-## PROBLEMS
+## これ何？
 
-- A+B: 2つの整数を足す問題のサンプル
-- A+B Float: 2つの実数を足す問題のサンプル (許容誤差1e-6)
-- A+B Special: 足したらxになる2つの整数を出力する問題のサンプル
-- [問題タイトル](https://link_to_google_document)
-- [問題タイトル](https://link_to_google_document)
+阪大と立命の有志(OB含む)によるプログラミングコンテストの準備プロジェクトです．
+gitとRimeを利用しているので，下記の方法に従ってインストールしてください．
 
-## OTHER
+## gitのインストール
 
-- [Rime 1.0 documentation](http://nya3jp.github.io/rime/)
-- [競技プログラミングの作問進行法](http://itohjam.hatenablog.com/entry/2014/12/02/214019)
-- [testlib](http://codeforces.com/testlib)
+aptやyumで普通にインストールできます．
+```
+$ sudo apt-get install git
+```
+
+## Rimeのインストール
+
+Ubuntu 16.04で確認．Macでもおそらく同じ．Windowsはmsys2で動作確認．
+
+まずPython2が入っているか確認する
+```
+$ python -V
+Python 2.7.13
+```
+コマンドが無いまたはバージョンが2.\*.\*でない場合はpyenvなどを使ってインストール．
+aptなどでもいいが，rimeのシェバンは `#!/usr/bin/python` であることに注意．
+```
+$ pyenv install 2.7.13
+$ pyenv rehash
+$ pyenv local 2.7.13
+```
+
+Rimeをインストールする．ここでは公式ではなくJAGによる拡張版を使う(公式でも良い)．2つの方法があるので好きな方法を使う．
+
+(1) pipを使う方法(標準的)
+```
+$ pip install git+https://github.com/icpc-jag/rime-plus
+```
+
+(2) 手っ取り早い方法
+```
+sudo git clone https://github.com/icpc-jag/rime-plus.git /usr/local/share/rime-plus
+sudo ln -s /usr/local/share/rime-plus/rime.py /usr/local/bin/rime
+```
+
+インストールが上手くいっているか確認する
+```
+$ rime
+rime.py <command> [<options>...] [<args>...]
+
+Rime is a tool for programming contest organizers to automate usual, boring
+and error-prone process of problem set preparation. It supports various
+programming contest styles like ACM-ICPC, TopCoder, etc. by plugins.
+
+To see a brief description and available options of a command, try:
+
+rime.py help <command>
+(略)
+```
+
+
+テストが走ることを確認する
+```
+$ rime test
+[ COMPILE  ] A+B/tests: generator.cc
+[ COMPILE  ] A+B/tests: validator.cc
+[ GENERATE ] A+B/tests: generator.cc
+(略)
+```
+
+## リンク
+
 - [作問ツールの使い方](https://drive.google.com/file/d/0B8nawKhBgu7IV0hTcnNMUEhqb2c/view?usp=sharing)
+- [Google Drive](https://drive.google.com/drive/folders/0B8nawKhBgu7IZ2xXeHY1bWJ4MDg)
+- [Rime 1.0 documentation](http://nya3jp.github.io/rime/)
+- [testlib](http://codeforces.com/testlib)
+- [競技プログラミングの作問進行法](http://itohjam.hatenablog.com/entry/2014/12/02/214019)

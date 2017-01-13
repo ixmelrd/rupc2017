@@ -1,0 +1,15 @@
+# OSやエディタが作るゴミ
+.DS_Store
+thumbs.db
+*~
+
+# 手元でテストするときの実行ファイル
+*.exe
+a.out
+
+# rimeが生成する一時ファイル
+*.pyc
+__pycache__/
+rime-out/
+build/
+

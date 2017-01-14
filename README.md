@@ -22,25 +22,32 @@ $ python -V
 Python 2.7.13
 ```
 コマンドが無いまたはバージョンが2.\*.\*でない場合はpyenvなどを使ってインストール．
-aptなどでもいいが，rimeのシェバンは `#!/usr/bin/python` であることに注意．
+aptなどでもいいが，下記(2)(3)の方法を使う場合にrimeのシェバンは `#!/usr/bin/python` であることに注意．
 ```
+$ cd rupc2017
 $ pyenv install 2.7.13
 $ pyenv rehash
 $ pyenv local 2.7.13
 ```
 
-Rimeをインストールする．ここでは公式ではなくJAGによる拡張版を使う(公式でも良い)．2つの方法があるので好きな方法を使う．
+Rimeをインストールする．ここでは公式ではなくJAGによる拡張版を使う(公式でも良い)．3つの方法があるので好きな方法を使う．
 
 (1) pipを使う方法(標準的)
 ```
 $ pip install git+https://github.com/icpc-jag/rime-plus
 ```
 
-(2) 手っ取り早い方法
+(2) 手っ取り早い方法 (パスが通った場所に置く)
 ```
 sudo git clone https://github.com/icpc-jag/rime-plus.git /usr/local/share/rime-plus
 sudo ln -s /usr/local/share/rime-plus/rime.py /usr/local/bin/rime
 ```
+
+(3) もっと手っ取り早い方法　(`~/rime/`などの適当な場所に置いて毎回直接実行する)
+```
+git clone https://github.com/icpc-jag/rime-plus.git ~/rime
+```
+この方法を取った場合，以降のrimeコマンドは`~/rime/rime.py`あるいは`python2 ~/rime/rime.py`になって面倒なのでおすすめしない．
 
 インストールが上手くいっているか確認する
 ```

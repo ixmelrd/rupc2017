@@ -2,7 +2,7 @@
 
 ## Input generators.
 #c_generator(src='generator.c')
-#cxx_generator(src='generator.cc', flags=['-O2', '-std=c++11'])
+cxx_generator(src='generator.cc', flags=['-O2', '-std=c++11'])
 #java_generator(src='Generator.java', encoding='UTF-8', mainclass='Generator')
 #script_generator(src='generator.py')
 

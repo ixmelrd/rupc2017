@@ -228,7 +228,7 @@ int main(){
         vector< vector<int> > B(M,vector<int>(N));
         for(int i=0;i<M;i++){
             for(int j=0;j<N;j++){
-                B[i][j] = rnd.next(MIN_B-2,MAX_B);
+                B[i][j] = rnd.next(MAX_B-2,MAX_B);
             }
         }
 

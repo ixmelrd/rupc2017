@@ -17,10 +17,10 @@ void makeNstring(int n,char *name){
   }//printf("%d\n",use);
   fclose(f);
 }
-void charange00(){
+void challenge00(){
   FILE *f;
   int i;
-  f=fopen("60_Charange_00.in","w");
+  f=fopen("60_Challenge_00.in","w");
   fprintf(f,"1\na");
   for(i=1;i<26*26*26;i++)fprintf(f,"a%c%c%c",i/26/26+'a',i/26%26+'a',i%26+'a');
   fprintf(f,"\n");
@@ -41,6 +41,6 @@ int main(){
     sprintf(s,"50_random_%02d.in",i);
     makeNstring(n,s);
   }
-  charange00();
+  challenge00();
   return 0;
 }

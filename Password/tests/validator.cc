@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <ctype.h>
 #include "./testlib.h"
 #include "./constraints.hpp"
 #include <cassert>
@@ -12,7 +11,7 @@ int main(){
     inf.readEoln();
 
     int string_length_sum = 0;
-    string regex = "[a-z]*";
+    string regex = "[a-z]+";
 
     for(int i = 0; i < n; i++){
         string s = inf.readToken(regex);

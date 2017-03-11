@@ -8,5 +8,5 @@
 problem(title = "Energy_Drink",
         id = "B",
         reference_solution = 'Pulmn',
-        time_limit = 2.0,
+        time_limit = 4.0,
         )

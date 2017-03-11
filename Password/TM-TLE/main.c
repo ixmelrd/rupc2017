@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<string.h>
-char s[100010],w[5];
+char s[200010],w[5];
 int main(){
   int n,i,j,k,l,a,b=1,c=0;
   scanf("%d",&n);
@@ -9,6 +9,7 @@ int main(){
     while(s[c++]);
     s[c-1]='_';
   }
+  s[c-1]=0;
   for(i=0;i<4;i++){
     b*=26;
     for(j=0;j<b;j++){

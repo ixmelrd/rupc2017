@@ -1,5 +1,5 @@
 #include<stdio.h>
-char s[100010],w[5];
+char s[200010],w[5];
 int main(){
   int n,i,j,k,l,a,b=1,c=0;
   scanf("%d",&n);

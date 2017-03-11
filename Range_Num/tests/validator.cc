@@ -4,9 +4,15 @@
 
 int main(){
     registerValidation();
-    inf.readInt(MIN_A, MAX_A);
+    int n = inf.readInt(MIN_N, MAX_N);
     inf.readSpace();
-    inf.readInt(MIN_B, MAX_B);
+    int m = inf.readInt(MIN_M, n);
+    inf.readEoln();
+
+    for(int i = 0; i < n; i++){
+        if(i) inf.readSpace();
+        inf.readInt(MIN_A, MAX_A);
+    }
     inf.readEoln();
     inf.readEof();
 }

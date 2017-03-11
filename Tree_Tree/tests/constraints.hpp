@@ -1,10 +1,9 @@
 #define MIN_A 1
-#define MAX_A 1000
+#define MAX_A 100000
 #define MIN_B 1
-#define MAX_B 1000
-
-#define MIN_H 1
-#define MAX_H 500
-#define MIN_W 1
-#define MAX_W 500
-#define MIN_N 1
+#define MAX_B 100000
+#define MIN_p 0
+#define MAX_p 1.0
+#define MIN_v 1
+#define MIN_c 1
+#define MAX_c 1000

@@ -9,14 +9,23 @@ using namespace std;
 
 #define rep(i,n) for(int i=0;i<(int)(n);i++)
 
-// aとbをファイルストリームに出力する
-// ファイル名は prefix_num.in (ex: 00_sample_00.in)
-void output(int a, int b, const string &prefix, int num){
+void output(int N, int M, const vector<int> &a, const string &prefix, int suffix){
     char name[100];
-    sprintf(name, "%s_%02d.in", prefix.c_str(), num);
+    sprintf(name, "%s_%02d.in", prefix.c_str(), suffix);
     ofstream ofs(name);
-    ofs << a << " " << b << endl;
+    ofs << N << ' ' << M << endl;
+    for (int i = 0; i < N; ++i) {
+        ofs << a[i] << (i + 1 == N ? '\n' : ' ');
+    }
     ofs.close();
+}
+
+vector<int> gen(int N) {
+    vector<int> A(N);
+    for (int i = 0; i < N; ++i) {
+        A[i] = rnd.next(MIN_A, MAX_A);
+    }
+    return A;
 }
 
 int main(){
@@ -24,22 +33,18 @@ int main(){
     // pidを足すことで、1秒以上間を置かずに起動したときに同じシードになってしまうのを防ぐ
     rnd.setSeed(time(0)+getpid());
 
-    // 乱数ケースを10個生成
+    // 小さい乱数ケース
     for(int i = 0; i < 10; ++i){
-        int A = rnd.next(MIN_A, MAX_A);
-        int B = rnd.next(MIN_B, MAX_B);
-        output(A, B, "50_random", i);
+        int N = rnd.next(MIN_N, 10);
+        int M = rnd.next(MIN_M, N);
+        vector<int> A = gen(N);
+        output(N, M, A, "50_random", i);
     }
-
-    // 片方が大きいケースを生成
+    // 大きい乱数ケース
     for(int i = 0; i < 10; ++i){
-        int A = 1;
-        int B = 1;
-        while(0.5*A <= B && B <= 1.5*A){
-            A = rnd.next(MIN_A, MAX_A);
-            B = rnd.next(MIN_B, MAX_B);
-        }
-        if(rnd.next(0,1)) swap(A, B);
-        output(A, B, "60_unbalance", i);
+        int N = rnd.next(MIN_N, MAX_N);
+        int M = rnd.next(MIN_M, N);
+        vector<int> A = gen(N);
+        output(N, M, A, "50_random", i);
     }
 }

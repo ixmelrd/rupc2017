@@ -15,6 +15,9 @@ using namespace std;
 #define rep(i,n) for(int i=0;i<(int)(n);i++)
 typedef pair<int,int> pii;
 
+const int bufsize=100000;                                                                 
+char buf[bufsize];
+
 // aとbをファイルストリームに出力する
 // ファイル名は prefix_num.in (ex: 00_sample_00.in)
 void output(int N, int M, int R, int Q, 
@@ -24,20 +27,21 @@ void output(int N, int M, int R, int Q,
     char name[100];
     sprintf(name, "%s_%02d.in", prefix.c_str(), num);
     ofstream ofs(name);
-    ofs<<N<<" "<<M<<" "<<R<<" "<<Q<<endl;
+    ofs.rdbuf()->pubsetbuf(buf, bufsize);
+    ofs<<N<<" "<<M<<" "<<R<<" "<<Q<<"\n";
     
     assert(A.size()==M);
     assert(B.size()==M);
     assert(C.size()==M);
     for(int i=0;i<M;i++){
-        ofs<<A[i]<<" "<<B[i]<<" "<<C[i]<<endl;
+        ofs<<A[i]<<" "<<B[i]<<" "<<C[i]<<"\n";
     }
 
     assert(X.size()==Q);
     assert(Y.size()==Q);
     assert(X.size()==Q);
     for(int i=0;i<Q;i++){
-        ofs<<X[i]<<" "<<Y[i]<<" "<<X[i]<<endl;
+        ofs<<X[i]<<" "<<Y[i]<<" "<<X[i]<<"\n";
     }
     ofs.close();
 }

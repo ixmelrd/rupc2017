@@ -13,6 +13,7 @@
 using namespace std;
 
 #define rep(i,n) for(int i=0;i<(int)(n);i++)
+#define srep(i,s,n) for(int i=s;i<(int)(n);i++)
 typedef pair<int,int> pii;
 
 const int bufsize=100000;                                                                 
@@ -308,5 +309,88 @@ int main(){
         }
 
         output(N, M, R, Q, A, B, C, X, Y, Z, "54_eachRvalue", case_num);
+    }
+
+    // x == y のケース
+    for(int case_num = 0; case_num < 3; ++case_num){
+        int N = rnd.next(MIN_N,30);
+        int M = rnd.next(MIN_M,(int)min<long long int>(MAX_M,(long long int)(N)*(N-1)));
+        int R = rnd.next(MIN_R,MAX_R);
+        int Q = rnd.next(MIN_Q,MAX_Q);
+
+        vector<int> A(M),B(M),C(M);
+        vector<pii> v;
+        for(int i=1;i<=N;i++){
+          for(int j=1;j<=N;j++){
+            if(i==j)continue;
+            v.push_back(pii(i,j));
+          }
+        }
+        shuffle(v.begin(),v.end());
+        rep(i,M){
+          A[i] = v[i].first;
+          B[i] = v[i].second;
+          C[i] = rnd.next(MIN_c,MAX_c);
+        }
+
+        vector<int> X(Q),Y(Q),Z(Q);
+        for(int i=0;i<Q;i++){
+          X[i] = rnd.next(MIN_x_y,N);
+          Y[i] = X[i];
+          Z[i] = rnd.next(MIN_z,MAX_z);
+        }
+
+        output(N, M, R, Q, A, B, C, X, Y, Z, "55_equalXY", case_num);
+    }
+    
+    // 交換回数最大のケース(円形グラフ)
+    for(int case_num = 0; case_num < 5; ++case_num){
+        int N = MAX_N;
+        int M = N;
+        int R = MAX_R;
+        int Q = MAX_Q;
+
+        vector<int> A(M),B(M),C(M);
+        vector<vector<int> > v(R);
+        rep(i,N) v[i%R].push_back(i+1);
+        vector<pii> edge;
+        rep(i,R){
+          int sz = v[i].size();
+          srep(j,1,sz){
+            edge.push_back(pii(v[i][j-1],v[i][j]));
+          }
+          edge.push_back(pii(v[i][sz-1], v[(i+1)%R][0]));
+        }
+        assert(edge.size()==M);
+        rep(i,M){
+          A[i] = edge[i].first;
+          B[i] = edge[i].second;
+          C[i] = case_num%2==0 ? MIN_c : MAX_c;
+        }
+
+        vector<int> X(Q),Y(Q),Z(Q);
+        for(int i=0;i<Q;i++){
+          X[i] = rnd.next(MIN_x_y,N);
+          Y[i] = rnd.next(MIN_x_y,N);
+          Z[i] = MAX_z;
+        }
+
+        output(N, M, R, Q, A, B, C, X, Y, Z, "56_maxchange", case_num);
+    }
+
+    // 最小ケース
+    {
+        int N = MIN_N;
+        int M = MIN_M;
+        int R = MIN_R;
+        int Q = 1;
+        vector<int> A(M),B(M),C(M);
+        vector<int> X(Q),Y(Q),Z(Q);
+        for(int i=0;i<Q;i++){
+          X[i] = N;
+          Y[i] = N;
+          Z[i] = 1;
+        }
+        output(N, M, R, Q, A, B, C, X, Y, Z, "57_minimum", 0);
     }
 }

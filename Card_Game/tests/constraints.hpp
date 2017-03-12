@@ -1,6 +1,7 @@
 #define MIN_N 1
 #define MAX_N 100000
 #define MIN_M 2
+#define MAX_M 200000
 #define MIN_R 2
 #define MAX_R 10
 #define MIN_Q 1

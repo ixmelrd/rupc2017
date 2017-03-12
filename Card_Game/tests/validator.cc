@@ -1,5 +1,6 @@
 #include "./testlib.h"
 #include "./constraints.hpp"
+#include <algorithm>
 #include <cassert>
 #include <vector>
 using namespace std;
@@ -20,7 +21,7 @@ int main(){
 
     int n = inf.readInt(MIN_N, MAX_N);
     inf.readSpace();
-    int m = inf.readInt(MIN_M, 2 * n);
+    int m = inf.readInt(MIN_M, (int)min<long long int>(MAX_M,(long long int)(n)*(n-1)));
     inf.readSpace();
     inf.readInt(MIN_R, MAX_R);
     inf.readSpace();

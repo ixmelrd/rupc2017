@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include <iostream>
 #include "./testlib.h"
 #include "./constraints.hpp"
 #include <sys/types.h>
@@ -29,16 +30,61 @@ void make1string(char *name){
 void challenge00(){
   FILE *f;
   int i;
-  f=fopen("60_Challenge_00.in","w");
+  f=fopen("60_challenge_00.in","w");
   fprintf(f,"1\na");
   for(i=1;i<26*26*26;i++)fprintf(f,"a%c%c%c",i/26/26+'a',i/26%26+'a',i%26+'a');
   fprintf(f,"\n");
   fclose(f);
 }
+
+namespace tubo28 {
+    using namespace std;
+
+    void output(const vector<string> &s, const string &name) {
+        ofstream ofs(name);
+        ofs << s.size() << endl;
+        for (auto &e : s) {
+            ofs << e << '\n';
+        }
+        ofs.close();
+    }
+
+    bool checkadd(string &s, const string &add) {
+        if (s.size() + add.size() > 399999) return false;
+        if (s.find(add) == string::npos) s += add;
+        return true;
+    }
+
+    void challenge01() {
+        string s;
+        string w(4, ' ');
+        for (char c = 'a'; c <= 'z'; ++c) {
+            w[0] = c;
+            for (char d = 'a'; d <= 'z'; ++d) {
+                w[1] = d;
+                for (char e = 'a'; e <= 'z'; ++e) {
+                    w[2] = e;
+                    for (char f = 'a'; f <= 'z'; ++f) {
+                        w[3] = f;
+                        if (!checkadd(s, w)) goto END;
+                    }
+                }
+            }
+        }
+
+    END:
+        // cout << w << endl;
+        // cout << s.size() << endl;
+        output({s}, "60_challenge_01.in");
+    }
+}
+//
+
 int main(){
   // 乱数のシードを設定
   // pidを足すことで、1秒以上間を置かずに起動したときに同じシードになってしまうのを防ぐ
   rnd.setSeed(time(0)+getpid());//[]
+
   int i;
   char s[100];
   //文章数が多いのを作る
@@ -60,5 +106,9 @@ int main(){
   }
   //コーナーケース
   challenge00();
+
+  // 時間がかかるので結果だけ置いておく
+  // tubo28::challenge01();
+
   return 0;
 }

@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<string.h>
-char s[200010],w[5];
+char s[600010],w[5];
 int main(){
   int n,i,j,k,l,a,b=1,c=0;
   scanf("%d",&n);

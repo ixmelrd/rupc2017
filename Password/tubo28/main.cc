@@ -13,7 +13,7 @@ using ll = long long;
 #define all(c) begin(c), end(c)
 
 bool used[600000];
-char s[100010];
+char s[500010];
 
 bool ok(int x){
     if (x == 0 || used[x]) return false;

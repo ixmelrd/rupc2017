@@ -40,7 +40,6 @@ int main(){
         assert(not isMultipleEdges(a,b,v));
         assert(not isSelfLoop(a,b));
         v[a].emplace_back(b);
-        v[b].emplace_back(a);
     }
 
     for(int i = 0; i < q; i++){

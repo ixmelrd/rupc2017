@@ -1,6 +1,19 @@
 #include "./testlib.h"
 #include "./constraints.hpp"
 #include <cassert>
+#include <vector>
+using namespace std;
+
+bool isMultipleEdges(int a, int b, vector<int> v[MAX_N]){
+    for(int i = 0; i < v[a].size(); i++){
+        if(v[a][i] == b) return true;
+    }
+    return false;
+}
+
+bool isSelfLoop(int a, int b){
+    return a == b;
+}
 
 int main(){
     registerValidation();
@@ -14,6 +27,7 @@ int main(){
     int q = inf.readInt(MIN_Q, MAX_Q);
     inf.readEoln();
 
+    vector<int> v[MAX_N];
     for(int i = 0; i < m; i++){
         int a = inf.readInt(MIN_a_b, n);
         inf.readSpace();
@@ -22,7 +36,11 @@ int main(){
         inf.readInt(MIN_c, MAX_c);
         inf.readEoln();
 
-        assert(a != b);
+        a--; b--;
+        assert(not isMultipleEdges(a,b,v));
+        assert(not isSelfLoop(a,b));
+        v[a].emplace_back(b);
+        v[b].emplace_back(a);
     }
 
     for(int i = 0; i < q; i++){

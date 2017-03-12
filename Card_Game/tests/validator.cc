@@ -20,7 +20,7 @@ int main(){
 
     int n = inf.readInt(MIN_N, MAX_N);
     inf.readSpace();
-    int m = inf.readInt(MIN_M, MAX_M);
+    int m = inf.readInt(MIN_M, 2 * n);
     inf.readSpace();
     inf.readInt(MIN_R, MAX_R);
     inf.readSpace();

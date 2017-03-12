@@ -22,11 +22,16 @@ int main(){
   int n,m,a[100010],b[100010],c[100010],ba[100010],bb[100010],bc[100010],i;
   scanf("%lf %d",&p,&n);//printf("%f\n",p);
   for(i=0;i<n-1;i++)scanf("%d %d %d",&a[i],&b[i],&c[i]);
-  scanf("%d",&m);
+  /*scanf("%d",&m);
   for(i=0;i<m-1;i++)scanf("%d %d %d",&ba[i],&bb[i],&bc[i]);
+  */
+  m = n;
+  for(i=0;i<n-1;i++)ba[i] = a[i], bb[i] = b[i], bc[i] = c[i];
+    
+  
   mkls(m,m-1,ba,bb,bc);
   r=f(1);//printf("%f\n",r);
   mkls(n,n-1,a,b,c);
-  printf("%f\n",f(1)*2);
+  printf("%.10lf\n",f(1));
   return 0;
 }

@@ -1,8 +1,8 @@
 # -*- coding: utf-8; mode: python -*-
 
 ## Input generators.
-cxx_generator(src='generator.c')
-#cxx_generator(src='generator.cc', flags=['-O2', '-std=c++11'])
+#cxx_generator(src='generator.c')
+cxx_generator(src='generator.cc', flags=['-O2', '-std=c++11'])
 #java_generator(src='Generator.java', encoding='UTF-8', mainclass='Generator')
 #script_generator(src='generator.py')
 
@@ -14,7 +14,7 @@ cxx_validator(src='validator.cc', flags=['-O2', '-std=c++11'])
 
 ## Output judges.
 #c_judge(src='judge.c')
-#cxx_judge(src='judge.cc')
+#cxx_judge(src='judge.cc') 
 #java_judge(src='Judge.java', encoding='UTF-8', mainclass='Judge')
 #script_judge(src='judge.py')
 

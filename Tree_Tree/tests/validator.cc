@@ -62,6 +62,7 @@ int main(){
     }
     assert(isTree(treeA, A));
 
+    /*
     int B = inf.readInt(MIN_B, MAX_B);
     AdjList treeB(B);
     inf.readEoln();
@@ -78,6 +79,7 @@ int main(){
         treeB[b].emplace_back(a,c);
     }
     assert(isTree(treeB, B));
-
+    */
+    
     inf.readEof();
 }

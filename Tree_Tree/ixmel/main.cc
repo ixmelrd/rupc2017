@@ -45,7 +45,9 @@ int main(){
 		aG[a].pb(pii(b,c));
 		aG[b].pb(pii(a,c));
 	}
-	cin>>m;
+	m = n;
+	bG=aG;
+	/*cin>>m;
 	bG=vvp(m);
 	rep(i,m-1){
 		int a,b,c;cin>>a>>b>>c;
@@ -53,11 +55,13 @@ int main(){
 		bG[a].pb(pii(b,c));
 		bG[b].pb(pii(a,c));
 	}
+	*/
+
 	used=vi(m);
 	Bdfs(0,0);
 	used=vi(n);
 	Adfs(0,0);
-	cout<<shosu(9)<<out+Bscore<<endl;
+	cout<<shosu(9)<<(out+Bscore) / 2.0 <<endl;
 }
 
 

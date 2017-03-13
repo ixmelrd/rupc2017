@@ -14,7 +14,7 @@ cxx_validator(src='validator.cc', flags=['-O2', '-std=c++11'])
 
 ## Output judges.
 #c_judge(src='judge.c')
-#cxx_judge(src='judge.cc') 
+cxx_judge(src='judge.cc', flags=['-O2', '-std=c++11', '-DRIME'])
 #java_judge(src='Judge.java', encoding='UTF-8', mainclass='Judge')
 #script_judge(src='judge.py')
 

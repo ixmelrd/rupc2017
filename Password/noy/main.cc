@@ -2,6 +2,7 @@
 #include<algorithm>
 #include<string>
 #include<map>
+#include<set>
 #include<vector>
 #define range(i,a,b) for(int i = (a); i < (b); i++)
 #define rep(i,b) for(int i = 0; i < (b); i++)
@@ -23,10 +24,6 @@ int convertTo27Decimal(string a){
     return res;
 }
 
-void allPartialStringTo27Decimal(vector<int> &num, map<string, int> m){
-    for(auto it:m) num.emplace_back(convertTo27Decimal(it.first));
-}
-
 string convertToString(int a){
     string res = "";
     int k = N;
@@ -40,58 +37,44 @@ string convertToString(int a){
     return res;
 }
 
-string findPassword(vector<int> num){
+string findPassword(set<int> s){
     int i = 1;
+    auto it = s.begin();
     while(true){
-        if(i != num[i - 1]){
+        if(i != *it){
             return convertToString(i);
         }
         i++;
+        it++;
     }
     return "error";
 }
 
-vector<string> findPartialString(string a){
-    vector<string> ret;
-    range(i,1,5){
-        rep(j,a.size()){
-            if(j + i >= a.size()){
-                ret.emplace_back(a.substr(j,a.size() - j));
+inline void partialStringToMap(map<string, bool> &m, string a){
+    range(j,1,5){
+        rep(k,a.size()){
+            if(j + k >= a.size()){
+                m[a.substr(k,a.size() - k)] = true;
             }else{
-                ret.emplace_back(a.substr(j,i));
+                m[a.substr(k,j)] = true;
             }
         }
     }
-    return ret;
 }
-
-void allPartialStringToMap(vector<string> v, map<string, int> &m){
-    rep(i,n){
-        vector<string> tmp;
-        tmp = findPartialString(v[i]);
-        rep(j,tmp.size()) m[tmp[j]] = 1;
-    }
-}
-
-void inputString(vector<string> &v){
-    rep(i,n) cin >> v[i];
-}
-
 
 int main(){
     cin >> n;
 
-    vector<string> v(n);
-    inputString(v);
+    map<string, bool> m;
+    rep(i,n){
+        string a;
+        cin >> a;
+        partialStringToMap(m,a);
+    }
 
-    map<string, int> m;
-    allPartialStringToMap(v,m);
-
-    vector<int> num;
-    allPartialStringTo27Decimal(num,m);
-    sort(all(num));
-
-    cout << findPassword(num) << endl;
+    set<int> s;
+    for(auto it:m) s.insert(convertTo27Decimal(it.first));
+    cout << findPassword(s) << endl;
 
     return 0;
 }

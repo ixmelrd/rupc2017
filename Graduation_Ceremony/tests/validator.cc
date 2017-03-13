@@ -4,9 +4,9 @@
 
 int main(){
     registerValidation();
-    inf.readInt(MIN_A, MAX_A);
-    inf.readSpace();
-    inf.readInt(MIN_B, MAX_B);
+    inf.readToken("[UDRL]{1,2000}");
+    inf.readEoln();
+    inf.readInt(MIN_K, MAX_K);
     inf.readEoln();
     inf.readEof();
 }

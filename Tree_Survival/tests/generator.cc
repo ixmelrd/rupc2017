@@ -1,4 +1,5 @@
 #include <iostream>
+#include <set>
 #include <tuple>
 #include <utility>
 #include <cassert>
@@ -18,11 +19,9 @@ using TPL = tuple<int,int,int>;
 
 const int INF = 1e9;
 
-// ワーシャルフロイドが走る程度
-const int SMALL_GRAPH_THRESHOLD = 700;
-
 // ファイルストリームに出力する
 void output(int N, int M, int T, const vector<TPL> &edges, const string &prefix, int suffix){
+    assert((int)edges.size() == M);
     char name[100];
     sprintf(name, "%s_%02d.in", prefix.c_str(), suffix);
     ofstream ofs(name);
@@ -35,28 +34,6 @@ void output(int N, int M, int T, const vector<TPL> &edges, const string &prefix,
     ofs.close();
 }
 
-
-
-int diameter(int N, const vector<PR> &edges) {
-    assert(N <= 700);
-    static int d[SMALL_GRAPH_THRESHOLD + 1][SMALL_GRAPH_THRESHOLD + 1];
-    rep (i, N) rep (j, N) d[i][j] = (i == j) ? 0 : INF;
-    for(auto &e : edges) {
-        int u, v;
-        tie(u, v) = e;
-        d[u][v] = d[v][u] = 1;
-    }
-    rep (k, N) rep (i, N) rep (j, N) {
-        d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
-    }
-    int maxi = 0;
-    rep (i, N) rep(j, N) {
-        maxi = max(maxi, d[i][j]);
-    }
-    assert(maxi != INF);
-    return maxi;
-}
-
 vector<PR> tree(int N) {
     vector<PR> edges;
     for (int i = 1; i < N; ++i) {
@@ -66,39 +43,57 @@ vector<PR> tree(int N) {
     return edges;
 }
 
-vector<PR> random_graph(int N, double p) {
-    // ランダムに全域木を作り，残りの辺を確率 p で追加
-    assert(N <= 700);
+vector<PR> add_edges_to_tree(int N, int M) {
     vector<PR> edges = tree(N);
-    rep (i, N) rep (j, i) {
-        if (rnd.next(0.0, 1.0) < p) {
-            edges.emplace_back(j, i);
-        }
-    }
     for (auto &e : edges) {
         if (e.first > e.second) swap(e.first, e.second);
     }
-    sort(all(edges));
-    edges.erase(unique(all(edges)), edges.end());
+    set<PR> used(edges.begin(), edges.end());
+    assert(M <= (long long)N*(N-1)/2);
+    while((int)edges.size() != M) {
+        int a = rnd.next(0, N - 1);
+        int b = rnd.next(0, N - 1);
+        if (a == b) continue;
+        if (a > b) swap(a, b);
+        if (used.count(PR(a, b))) continue;
+        edges.emplace_back(a, b);
+        used.emplace(a, b);
+    }
     shuffle(all(edges));
-    if ((int)edges.size() > MAX_M) {
-        edges.resize(MAX_M);
+    return edges;
+}
+
+vector<PR> path_graph(int N) {
+    vector<PR> edges;
+    rep (i, N - 1) {
+        edges.emplace_back(i, i + 1);
     }
     return edges;
 }
 
-vector<PR> no_edge_graph(int n) {
-    return {};
+vector<PR> dango_graph(int N) {
+    // TODO : 団子状のグラフを付くる
 }
 
-vector<TPL> random_t(const vector<PR> &edges, int T) {
+vector<TPL> random_t(const vector<PR> &edges, int max_t) {
     int M = edges.size();
     vector<TPL> res(M);
     rep (i, M) {
         int a, b;
         tie(a, b) = edges[i];
-        int t = rnd.next(1, T);
+        int t = rnd.next(1, max_t);
         res[i] = make_tuple(a, b, t);
+    }
+    return res;
+}
+
+vector<TPL> max_t(const vector<PR> &edges) {
+    int M = edges.size();
+    vector<TPL> res(M);
+    rep (i, M) {
+        int a, b;
+        tie(a, b) = edges[i];
+        res[i] = make_tuple(a, b, MAX_T);
     }
     return res;
 }
@@ -106,17 +101,53 @@ vector<TPL> random_t(const vector<PR> &edges, int T) {
 int main(){
     rnd.setSeed(time(0)+getpid());
 
-    const int NUM_SR = 15;
-    for(int i = 0; i < NUM_SR; ++i) {
-        // 辺確率 p は[1e-8, 1.0]からlogをとって等間隔に選ぶ
-        int N = rnd.next(MIN_N, SMALL_GRAPH_THRESHOLD);
-        double p = exp(log(1e-8) + (log(1) - log(1e-8)) / NUM_SR * i);
-        vector<PR> small_random = random_graph(N, p);
-        // cerr << p << endl;
-        // cerr << diameter(N, small_random) << endl;
-        int T = rnd.next(MIN_T, MAX_T);
-        vector<TPL> small_random_ = random_t(small_random, T);
-        int M = small_random.size();
-        output(N, M, T, small_random_, "50_random", i);
+    // 木に適当に辺を追加
+    // 手計算で確認用の小さいケース (意外とコーナーケースが生成されたりもする)
+    for (int i = 0; i < 20; ++i) {
+        int N = rnd.next(MIN_N, 5);
+        int M = rnd.next(N - 1, N*(N - 1)/2);
+        int T = 5;
+        vector<TPL> g = random_t(add_edges_to_tree(N, M), T);
+        output(N, M, T, g, "40_random_small", i);
     }
+
+    for (int i = 0; i < 10; ++i) {
+        int N = rnd.next(MIN_N, MAX_N);
+        int M = min(MAX_M, N * (int)rnd.next(1.0, 1.1));
+        int T = rnd.next(MIN_T, MAX_T);
+        vector<TPL> g = random_t(add_edges_to_tree(N, M), T);
+        output(N, M, T, g, "50_random_sparce", i);
+    }
+
+    for (int i = 0; i < 10; ++i) {
+        int N = rnd.next(MIN_N, MAX_N);
+        int M = rnd.next(N - 1, (int)min((long long)MAX_M, (long long)N*(N - 1)/2));
+        int T = rnd.next(MIN_T, MAX_T);
+        vector<TPL> g = random_t(add_edges_to_tree(N, M), T);
+        output(N, M, T, g, "50_random_dence", i);
+    }
+
+    // 木
+    for (int i = 0; i < 4; ++i) {
+        int N = rnd.next(MIN_N, MAX_N);
+        int T = rnd.next(MIN_T, MAX_T);
+        vector<TPL> t = random_t(tree(N), T);
+        output(N, N - 1, T, t, "50_tree", i);
+    }
+
+    // 長いパス (DFS殺し)
+    {
+        int N = MAX_N;
+        vector<TPL> g = random_t(path_graph(N), MAX_T);
+        output(N, N - 1, MAX_T, g, "50_dfs_killer", 0);
+    }
+
+    // オーバーフロー殺し
+    {
+        int N = MAX_N;
+        int M = MAX_M;
+        vector<TPL> g = max_t(add_edges_to_tree(N, M));
+        output(N, M, MAX_T, g, "50_32bit_killer", 0);
+    }
+    
 }

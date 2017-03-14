@@ -63,6 +63,7 @@ int main(){
   for(i=0;i<n;i++)cc[i+1]=1;
   for(i=0;i<m;i++){
     scanf("%d %d %d",&a,&b,&c);
+    --a; --b;
     nt[i  ]=ta[to[i+m]=a];
     nt[i+m]=ta[to[i  ]=b];
     co[ta[a]=i]=co[ta[b]=i+m]=c;

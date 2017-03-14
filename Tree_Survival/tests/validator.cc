@@ -51,7 +51,7 @@ int main(){
 
     int N = inf.readInt(MIN_N, MAX_N);
     inf.readSpace();
-    int M = inf.readInt(N - 1, min(MAX_M, N * (N - 1) / 2));
+    int M = inf.readInt(N - 1, (int)min((long long)MAX_M, (long long)N * (N - 1) / 2));
     inf.readSpace();
     int T = inf.readInt(MIN_T, MAX_T);
     inf.readEoln();

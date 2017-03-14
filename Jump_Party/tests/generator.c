@@ -6,7 +6,7 @@
 
 void MakeGrid(int h,int w,int n,char *name){
   FILE *f;
-  int x,y,i,j;
+  int x,y,i,j,d[300010]={};
   char s[510][510]={};
   f=fopen(name,"w");
   fprintf(f,"%d %d %d\n",h,w,n);
@@ -15,14 +15,9 @@ void MakeGrid(int h,int w,int n,char *name){
     for(j=1;j<w;j++)fprintf(f," %d %d",rnd.next(0,h-1),rnd.next(0,w-1));
     fprintf(f,"\n");
   }
-  for(i=0;i<n;i++){
-    do{
-      x=rnd.next(0,h-1);
-      y=rnd.next(0,w-1);
-    }while(s[y][x]);
-    s[y][x]=1;
-    fprintf(f,"%d %d\n",x,y);
-  }
+  for(i=0;i<h*w;i++)d[i]=i;
+  shuffle(d,d+h*w);
+  for(i=0;i<n;i++)fprintf(f,"%d %d\n",d[i]/w,d[i]%w);
   fclose(f);
 }
 void Challenge00(){
@@ -53,7 +48,7 @@ void Challenge02(){
   char s[100]={"60_Challenge_02.in"};
   MakeGrid(MAX_H,MAX_W,1,s);
 }
-
+int MIN(int a,int b){return a<b?a:b;}
       
 int main(){
   int i,h,w,n;
@@ -66,7 +61,7 @@ int main(){
   for(i=0;i<5;i++){
     h=rnd.next(MIN_H,10);
     w=rnd.next(MIN_W,10);
-    n=rnd.next(MIN_N,10);
+    n=rnd.next(MIN_N,MIN(h*w,10));
     sprintf(s,"50_random_small_%02d.in",i);
     MakeGrid(h,w,n,s);
   }

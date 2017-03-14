@@ -4,11 +4,11 @@ int main(){
   scanf("%d %d %d",&h,&w,&n);
   for(i=0;i<h*w;i++){
     scanf("%d %d",&x,&y);
-    d[i]=y*w+x;
+    d[i]=x*w+y;
   }
   for(i=0;i<n;i++){
     scanf("%d %d",&x,&y);
-    p[i]=y*w+x;
+    p[i]=x*w+y;
   }
   for(i=0;i<h*w+10;i++){
     int f[30010]={};

@@ -13,11 +13,11 @@ int main(){
   scanf("%d %d %d",&h,&w,&n);
   for(i=0;i<h*w;i++){
     scanf("%d %d",&x,&y);
-    d[0][i]=y*w+x;
+    d[0][i]=x*w+y;
   }
   for(i=0;i<n;i++){
     scanf("%d %d",&x,&y);
-    p[i]=y*w+x;
+    p[i]=x*w+y;
   }
   for(i=0;(1<<i)<=h*w;i++){
     for(j=0;j<h*w;j++)d[i+1][j]=d[i][d[i][j]];

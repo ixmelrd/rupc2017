@@ -17,8 +17,6 @@ using ll = long long;
 using PR = pair<int,int>;
 using TPL = tuple<int,int,int>;
 
-const int INF = 1e9;
-
 // ファイルストリームに出力する
 void output(int N, int M, int T, const vector<TPL> &edges, const string &prefix, int suffix){
     assert((int)edges.size() == M);
@@ -39,6 +37,16 @@ vector<PR> tree(int N) {
     for (int i = 1; i < N; ++i) {
         int par = rnd.next(0, i - 1);
         edges.emplace_back(i, par);
+    }
+    return edges;
+}
+
+vector<PR> star(int N) {
+    int c = rnd.next(0, N - 1);
+    vector<PR> edges;
+    for (int i = 0; i < N; ++i) {
+        if (i == c) continue;
+        edges.emplace_back(c, i);
     }
     return edges;
 }
@@ -133,6 +141,14 @@ int main(){
         int T = rnd.next(MIN_T, MAX_T);
         vector<TPL> t = random_t(tree(N), T);
         output(N, N - 1, T, t, "50_tree", i);
+    }
+
+    // スター
+    for (int i = 0; i < 4; ++i) {
+        int N = rnd.next(MIN_N, MAX_N);
+        int T = rnd.next(MIN_T, MAX_T);
+        vector<TPL> t = random_t(star(N), T);
+        output(N, N - 1, T, t, "50_star", i);
     }
 
     // 長いパス (DFS殺し)

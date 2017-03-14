@@ -11,14 +11,14 @@ void MakeGrid(int h,int w,int n,char *name){
   f=fopen(name,"w");
   fprintf(f,"%d %d %d\n",h,w,n);
   for(i=0;i<h;i++){
-    fprintf(f,"%d %d",rnd.next(0,w-1),rnd.next(0,h-1));
-    for(j=1;j<w;j++)fprintf(f," %d %d",rnd.next(0,w-1),rnd.next(0,h-1));
+    fprintf(f,"%d %d",rnd.next(0,h-1),rnd.next(0,w-1));
+    for(j=1;j<w;j++)fprintf(f," %d %d",rnd.next(0,h-1),rnd.next(0,w-1));
     fprintf(f,"\n");
   }
   for(i=0;i<n;i++){
     do{
-      x=rnd.next(0,w-1);
-      y=rnd.next(0,h-1);
+      x=rnd.next(0,h-1);
+      y=rnd.next(0,w-1);
     }while(s[y][x]);
     s[y][x]=1;
     fprintf(f,"%d %d\n",x,y);

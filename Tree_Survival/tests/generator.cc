@@ -75,6 +75,9 @@ vector<PR> random_graph(int N, double p) {
             edges.emplace_back(j, i);
         }
     }
+    for (auto &e : edges) {
+        if (e.first > e.second) swap(e.first, e.second);
+    }
     sort(all(edges));
     edges.erase(unique(all(edges)), edges.end());
     shuffle(all(edges));

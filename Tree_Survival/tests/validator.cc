@@ -5,19 +5,25 @@
 using namespace std;
 
 vector<int> g[MAX_N];
+vector<pair<int, int>> edges;
 
-bool isMultipleEdges(int a, int b){ //多重辺及び逆辺検知
-    for(int i = 0; i < g[a].size(); i++){
-        if(g[a][i] == b) return true;
+bool isSimple() {
+    sort(edges.begin(), edges.end());
+    for (auto &e : edges) {
+        if (e.first > e.second) swap(e.first, e.second);
     }
-    return false;
+    for (int i = 0; i < (int)edges.size(); ++i) {
+        auto &e = edges[i];
+        if (e.first == e.second) return false;
+        if (i + 1 != (int)edges.size()) {
+            auto &f = edges[i + 1];
+            if (e == f) return false;
+        }
+    }
+    return true;
 }
 
-bool isSelfLoop(int a, int b){
-    return a == b;
-}
-
-bool isLinking(int n){
+bool isConnected(int n){
     bool isVisited[MAX_N] = {0};
     queue<int> q;
 
@@ -27,7 +33,7 @@ bool isLinking(int n){
     int u;
     while(not q.empty()){
         u = q.front(); q.pop();
-        for(int i = 0; i < g[u].size(); i++){
+        for(int i = 0; i < (int)g[u].size(); i++){
             int next = g[u][i];
             if(isVisited[next] == 0){
                 q.push(next);
@@ -65,13 +71,13 @@ int main(){
         inf.readEoln();
 
         a--; b--;
-        assert(not isMultipleEdges(a, b));
-        assert(not isSelfLoop(a, b));
         g[a].emplace_back(b);
         g[b].emplace_back(a);
+        edges.emplace_back(a, b);
     }
 
-    assert(isLinking(N));
+    assert(isConnected(N));
+    assert(isSimple());
 
 	inf.readEof();
 }

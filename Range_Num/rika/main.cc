@@ -3,7 +3,6 @@
 #include<algorithm>
 using namespace std;
 #define rep(i,n) for(i=0;i<n;i++)
-
 int main(void) {
     int n,m,i;
     cin>>n>>m;

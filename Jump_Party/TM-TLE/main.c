@@ -1,6 +1,6 @@
 #include<stdio.h>
 int main(){
-  int h,w,p[30010],d[30010],i,j,n,x,y;
+  int h,w,p[300010],d[300010],i,j,n,x,y;
   scanf("%d %d %d",&h,&w,&n);
   for(i=0;i<h*w;i++){
     scanf("%d %d",&x,&y);
@@ -11,7 +11,7 @@ int main(){
     p[i]=x*w+y;
   }
   for(i=0;i<h*w+10;i++){
-    int f[30010]={};
+    int f[300010]={};
     for(j=0;j<n;j++){
       p[j]=d[p[j]];
       if(f[p[j]])goto END;

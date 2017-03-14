@@ -1,15 +1,15 @@
 #include<stdio.h>
 int n;
 int f(int *d,int *p){
-  int i,a[30010]={};
+  int i,a[300010]={};
   for(i=0;i<n;i++){
     if(a[d[p[i]]])return 1;
     a[d[p[i]]]=1;
   }
   return 0;
 }
+int h,w,p[300010],d[50][300010],i,j,s=0,x,y;
 int main(){
-  int h,w,p[30010],d[50][30010],i,j,s=0,x,y;
   scanf("%d %d %d",&h,&w,&n);
   for(i=0;i<h*w;i++){
     scanf("%d %d",&x,&y);

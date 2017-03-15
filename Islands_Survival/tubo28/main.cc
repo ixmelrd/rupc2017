@@ -31,7 +31,7 @@ struct node {
         : find(f), size(s), time(t), ch(c) {}
     node() {}
     void *operator new(size_t) {
-        static node pool[200010];
+        static node pool[2000100];
         static node *p = pool;
         return p++;
     }

@@ -8,5 +8,5 @@
 problem(title = "A+B Problem",
         id = "A",
         # reference_solution = 'Yazaten',
-        time_limit = 1.0,
+        time_limit = 2.0,
         )

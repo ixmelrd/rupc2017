@@ -1,4 +1,6 @@
 #include<stdio.h>
+typedef long long ll;
+#define int ll
 int MAX(int a,int b){return a<b?b:a;}
 int R=1,C=1,H[2000010],N[2000010];
 //評価関数（いまはMIN）
@@ -55,14 +57,14 @@ void Union(int id){
   }
   printf("\n");//*/
 }
-int main(){
+signed main(){
   int k,i,t,r,q[100010],a,b,c;
-  scanf("%d %d %d",&n,&m,&k);
+  scanf("%lld %lld %lld",&n,&m,&k);
   for(i=0;i<n;i++)ta[i]=f[i]=-1;
   for(i=0;i<n;i++)bt[i+1]=k;
   for(i=0;i<n;i++)cc[i+1]=1;
   for(i=0;i<m;i++){
-    scanf("%d %d %d",&a,&b,&c);
+    scanf("%lld %lld %lld",&a,&b,&c);
     --a; --b;
     nt[i  ]=ta[to[i+m]=a];
     nt[i+m]=ta[to[i  ]=b];
@@ -81,6 +83,6 @@ int main(){
   for(i=0;i<m;i++)Union(hout()-1);
   //for(i=0;i<n;i++)printf("%d %d\n",i,dp[i]);
   for(i=1;p[i];i=p[i]);
-  printf("%d\n",dp[i]+bt[i]*cc[i]);
+  printf("%lld\n",dp[i]+bt[i]*cc[i]);
   return 0;
 }

@@ -22,8 +22,6 @@ struct uf_tree {
     int find(int x) { return parent[x] < 0 ? x : parent[x] = find(parent[x]); }
     int size(int x) { return -parent[find(x)]; }
     int size() { return __size; }
-    void operator () (int x, int y) { unite(x, y); }
-    int operator () (int x) { return find(x); }
 };
 
 struct node {
@@ -49,22 +47,19 @@ edge edges[100010];
 np uf_state[100010];
 map<int,vector<edge>> events;
 vector<edge> g[100010];
-vector<int> vs;
-map<int, np> org;
-map<int, set<np>> collect;
-queue<int> q;
+
 int dist[100010];
 
-int dfs(np n, int cur, int d=0){
+int dfs(np n, int cur){
     int ans;
     if(n->ch.size()){
         ans = -INF;
         for(auto &c : n->ch){
-            int cand = (n->time - cur) * n->size + dfs(c, n->time, d+1);
+            int cand = (n->time - cur) * n->size + dfs(c, n->time);
             ans = max(ans, cand);
         }
     } else {
-        ans = dist[n->find] != INF ? 0 : -INF;
+        ans = dist[n->find] != INF ? (n->time - cur) * n->size : -INF;
     }
     return ans;
 }
@@ -93,30 +88,29 @@ signed main(){
     rep(i, N) uf_state[i] = new node(i, 1, T, {}); // 時間Tですべての辺が消えると考える
 
     // もっときれいな実装方法があると思う
+    vector<np> org(N);
     for(auto &ev : events){
-        vs.clear();
-        org.clear();
+        static map<int, set<np>> collect;
         collect.clear();
+
         int cur = -ev.first;
         auto &es = ev.second;
         for(auto &e : es){
             int t, a, b;
             tie(t, a, b) = e;
-            vs.push_back(a);
-            vs.push_back(b);
-            org[a] = uf_state[uf(a)];
-            org[b] = uf_state[uf(b)];
+            org[a] = uf_state[uf.find(a)];
+            org[b] = uf_state[uf.find(b)];
         }
         for(auto &e : es){
             int t, a, b;
             tie(t, a, b) = e;
-            uf(a, b);
+            uf.unite(a, b);
         }
         for(auto &e : es){
             int t, a, b;
             tie(t, a, b) = e;
-            collect[uf(a)].insert(org[a]);
-            collect[uf(b)].insert(org[b]);
+            collect[uf.find(a)].insert(org[a]);
+            collect[uf.find(b)].insert(org[b]);
         }
         for(auto &e : collect){
             int v = e.first;
@@ -127,6 +121,7 @@ signed main(){
 
     fill(dist, dist + N, INF);
     dist[0] = 0;
+    queue<int> q;
     q.push(0);
     while(q.size()){
         int v = q.front();
@@ -141,6 +136,6 @@ signed main(){
         }
     }
 
-    // show(uf_state[uf(0)]);
-    cout << dfs(uf_state[uf(0)], 0) << endl;
+    // show(uf_state[uf.find(0)]);
+    cout << dfs(uf_state[uf.find(0)], 0) << endl;
 }

@@ -10,52 +10,42 @@ const int INF = 1e9;
 string s;
 int k;
 
-void solve(const string &a, int dp[2010][2010]) {
-    int n = s.size();
-    rep (i, 2010) rep (j, 2010) dp[i][j] = -INF;
+int dp[2010][2010];
+
+void solve(const string &a, char add, int res[2010]) {
+    int n = a.size();
+    rep(i, n+1) rep(j, k+1) dp[i][j] = -INF;
     dp[0][0] = 0;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < k; ++j) {
-            if (dp[i][j] == -INF) continue;
-            dp[i+1][j] = max(dp[i+1][j], dp[i][j]);
-            dp[i][j+1] = max(dp[i][j+1], dp[i][j]);
-            int d = 1;
-            if (a[i] == 'D' || a[i] == 'L') d *= -1;
+    rep (i, n) {
+        rep (j, k+1) {
+            int d = a[i] == add ? +1 : -1;
             if (j % 2 == 1) d *= -1;
             dp[i+1][j] = max(dp[i+1][j], dp[i][j] + d);
             dp[i+1][j+1] = max(dp[i+1][j+1], dp[i][j] - d);
         }
     }
+    res[0] = dp[n][0];
+    rep (i, k + 1) if (i) res[i] = max(res[i-1], dp[n][i]);
 }
-
-int dpud[2010][2010], dplr[2010][2010];
-int dpud2[2010][2010], dplr2[2010][2010];
 
 int main() {
     cin >> s >> k;
-    string ud, lr;
-    string ud2, lr2;
+    string a, b;
     for (char c : s) {
         if (c == 'U' || c == 'D') {
-            ud += c;
-            ud2 += c ^ ('U' ^ 'D');
-        }
-        if (c == 'L' || c == 'R') {
-            lr += c;
-            lr2 += c ^ ('L' ^ 'R');
+            a += c;
+        } else {
+            b += c;
         }
     }
-    int a = ud.size(), b = lr.size();
-    solve(ud, dpud);
-    solve(lr, dplr);
-    solve(ud2, dpud2);
-    solve(lr2, dplr2);
-    int ans = -1e9;
-    for (int i = 0; i <= k; ++i) {
-        int cand = 0;
-        cand += max(dpud[a][i], dpud2[a][i]);
-        cand += max(dplr[b][i], dplr2[b][i]);
-        ans = max(ans, cand);
+    int dp[4][2010];
+    solve(a, 'U', dp[0]);
+    solve(a, 'D', dp[1]);
+    solve(b, 'L', dp[2]);
+    solve(b, 'R', dp[3]);
+    int ans = -INF;
+    rep (i, k+1) {
+        ans = max(ans, max(dp[0][i], dp[1][i]) + max(dp[2][k-i], dp[3][k-i]));
     }
     cout << ans << endl;
 }

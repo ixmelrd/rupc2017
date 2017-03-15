@@ -24,9 +24,9 @@ int main(){
       y[0]--;
     }
   }
-  for(i=1;i<k;i++)x[i]=f(x[i-1],x[i]);
-  for(i=1;i<k;i++)y[i]=f(y[i-1],y[i]);
-  for(i=0;i<=k;i++){
+  for(i=0;i<k;i++)x[i+1]=f(x[i+1],x[i]);
+  for(i=0;i<k;i++)y[i+1]=f(y[i+1],y[i]);
+  for(i=0;i<=k;i++){//printf("%d %d\n",x[i],y[i]);
     if(max<abs(x[i])+abs(y[k-i]))max=abs(x[i])+abs(y[k-i]);
   }
   printf("%d\n",max);

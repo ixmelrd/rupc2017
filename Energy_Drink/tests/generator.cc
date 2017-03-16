@@ -45,38 +45,38 @@ int main(){
     rnd.setSeed(time(0)+getpid());
 
     // 小さめの乱数ケースを5個生成
-    randomCase(MIN_N, 10, MIN_A, 10, MIN_B, 10, "random_min", 5);
+    randomCase(MIN_N, 10, MIN_A, 10, MIN_B, 10, "50_random_min", 5);
 
     // 完全乱数ケースを10個生成
-    randomCase(MIN_N, MAX_N, MIN_A, MAX_A, MIN_B, MAX_B, "random", 10);
+    randomCase(MIN_N, MAX_N, MIN_A, MAX_A, MIN_B, MAX_B, "51_random", 10);
 
     // N最大，大きめの乱数ケースを10個生成
-    randomCase(MAX_N-1, MAX_N, MAX_A/2, MAX_A, MAX_B/2, MAX_B, "random_large", 10);
+    randomCase(MAX_N-1, MAX_N, MAX_A/2, MAX_A, MAX_B/2, MAX_B, "52_random_large", 10);
 
     // N最小ケースを5個生成
-    randomCase(MIN_N, MIN_N, MIN_A, 10, MIN_B, 10, "random_min_n", 5);
+    randomCase(MIN_N, MIN_N, MIN_A, 10, MIN_B, 10, "53_random_min_n", 5);
 
     // 全部最大ケース
-    randomCase(MAX_N, MAX_N, MAX_A, MAX_A, MAX_B, MAX_B, "maximum", 1);
+    randomCase(MAX_N, MAX_N, MAX_A, MAX_A, MAX_B, MAX_B, "54_maximum", 1);
 
     // a_1 == a_2 == b_1 == b_2 のケース
     for(int i = 0; i < 2; ++i){
         a[i] = 10;
         b[i] = 10;
     }
-    output(2, "handmade", 0);
+    output(2, "10_handmade", 0);
 
     // 日数最大のケース
     for(int i = 0; i < MAX_N; ++i){
         a[i] = MIN_A + i;
         b[i] = MIN_B + i;
     }
-    output(MAX_N, "handmade", 1);
+    output(MAX_N, "10_handmade", 1);
 
     // N最大，a+bがすべて等しいケース
     for(int i = 0; i < MAX_N; ++i){
         a[i] = MIN_A + (MAX_N - i - 1);
         b[i] = MIN_B + i;
     }
-    output(MAX_N, "handmade", 2);
+    output(MAX_N, "10_handmade", 2);
 }

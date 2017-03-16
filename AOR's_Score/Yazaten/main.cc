@@ -128,13 +128,14 @@ int main(){
     add_edge(X, t, N-K, 0);
     
     
-    const auto f = [&](int n){
-        if(n>=90*N)return 'A';
-        if(n>=70*N)return 'B';
-        if(n>=50*N)return 'C';
-        return 'F';
-    };
+    // const auto f = [&](int n){
+    //     if(n>=90*N)return 'A';
+    //     if(n>=70*N)return 'B';
+    //     if(n>=50*N)return 'C';
+    //     return 'F';
+    // };
     
     int res = -1*min_cost_flow(s, t, N);
-    cout<<res<<" "<<f(res)<<endl;
+    // cout<<res<<" "<<f(res)<<endl;
+    cout << res << endl;
 }

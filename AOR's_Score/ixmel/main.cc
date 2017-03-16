@@ -88,11 +88,12 @@ int main(){
 	mcf.add_edge(n+m+2,n+m+1,n-k,0);
 	
 	int score=n*100-mcf.mcf(n+m,n+m+1,n);
-	cout<<score<<" ";
-	if(score>=n*90)cout<<"A"<<endl;
-	else if(score>=n*70)cout<<"B"<<endl;
-	else if(score>=n*50)cout<<"C"<<endl;
-	else cout<<"F"<<endl;
+    cout << score << endl;
+	// cout<<score<<" ";
+	// if(score>=n*90)cout<<"A"<<endl;
+	// else if(score>=n*70)cout<<"B"<<endl;
+	// else if(score>=n*50)cout<<"C"<<endl;
+	// else cout<<"F"<<endl;
 	
 }
 

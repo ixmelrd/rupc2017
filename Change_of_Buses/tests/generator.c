@@ -45,8 +45,8 @@ int main(){
     n=rnd.next(MIN_N,10);
     m=rnd.next(MIN_M,10);
     s=g=rnd.next(1,n);
-    //while(s==g)g=rnd.next(MIN_N,n);
-    g=rnd.next(1,n);
+    while(s==g)g=rnd.next(1,n);
+    //g=rnd.next(1,n);
     sprintf(c,"50_random_small_%02d.in",i);
     makeG(n,m,s,g,c);
   }
@@ -54,8 +54,8 @@ int main(){
     n=rnd.next(MIN_N,MAX_N);
     m=rnd.next(MIN_M,MAX_M);
     s=g=rnd.next(1,n);
-    //while(s==g)g=rnd.next(MIN_N,n);
-    g=rnd.next(1,n);
+    while(s==g)g=rnd.next(1,n);
+    //g=rnd.next(1,n);
     sprintf(c,"51_random_large_%02d.in",i);
     makeG(n,m,s,g,c);
   }
@@ -63,8 +63,8 @@ int main(){
     n=MAX_N;
     m=MAX_M;
     s=g=rnd.next(1,n);
-    //while(s==g)g=rnd.next(MIN_N,n);
-    g=rnd.next(1,n);
+    while(s==g)g=rnd.next(1,n);
+    //g=rnd.next(1,n);
     sprintf(c,"52_random_MAX_%02d.in",i);
     makeG(n,m,s,g,c);
   }

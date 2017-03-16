@@ -1,34 +1,25 @@
 #include<stdio.h>
-#include<stdlib.h>
-int f(int a,int b){return abs(a)>abs(b)?a:b;}  
+int MIN(int a,int b){return a<b?a:b;}
+int MAX(int a,int b){return a<b?b:a;}
+int Y[]={-1,0,1,0};
+int X[]={0,1,0,-1};
 int main(){
-  int k,i,j,max=0,x[3010]={};
-  int y[3010]={};
-  char s[3010];
+  int k,i,j,max=0,l[3010],r[3010],u[3010],d[3010],w;
+  char s[3010],c[]={"URDL"};
   scanf("%s %d",s,&k);
+  for(i=0;i<k+2;i++)l[i]=r[i]=u[i]=d[i]=0;
   for(i=0;s[i];i++){
-    if(s[i]=='R'){
-      for(j=k;j;j--)x[j]=f(-x[j-1]+1,x[j]+1);
-      x[0]++;
+    for(w=0;s[i]-c[w];w++);
+    for(j=k;j;j--){
+      l[j]=MIN(-r[j-1],l[j])+X[w];
+      r[j]=MAX(-l[j-1],r[j])+X[w];
+      u[j]=MIN(-d[j-1],u[j])+Y[w];
+      d[j]=MAX(-u[j-1],d[j])+Y[w];
     }
-    if(s[i]=='L'){
-      for(j=k;j;j--)x[j]=f(-x[j-1]-1,x[j]-1);
-      x[0]--;
-    }
-    if(s[i]=='U'){
-      for(j=k;j;j--)y[j]=f(-y[j-1]+1,y[j]+1);
-      y[0]++;
-    }
-    if(s[i]=='D'){
-      for(j=k;j;j--)y[j]=f(-y[j-1]-1,y[j]-1);
-      y[0]--;
-    }
+    r[0]=l[0]+=X[w];
+    u[0]=d[0]+=Y[w];
   }
-  for(i=0;i<k;i++)x[i+1]=f(x[i+1],x[i]);
-  for(i=0;i<k;i++)y[i+1]=f(y[i+1],y[i]);
-  for(i=0;i<=k;i++){//printf("%d %d\n",x[i],y[i]);
-    if(max<abs(x[i])+abs(y[k-i]))max=abs(x[i])+abs(y[k-i]);
-  }
+  for(i=0;i<=k;i++)max=MAX(max,MAX(-l[i],r[i])+MAX(-u[k-i],d[k-i]));
   printf("%d\n",max);
   return 0;
 }

@@ -26,8 +26,8 @@ namespace tubo28 {
         int g = n;
         vector<edge> es;
         int mid = rnd.next(1, n);
-        es.emplace_back(s, mid, 50000, 0);
-        es.emplace_back(mid, g, 100000, 0);
+        es.emplace_back(s, mid, 50000, 1);
+        es.emplace_back(mid, g, 100000, 1);
         while(es.size() < MAX_M) {
             int u = 0, v = 0;
             while(true) {

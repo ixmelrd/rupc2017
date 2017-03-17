@@ -6,6 +6,8 @@ thumbs.db
 # 手元でテストするときの実行ファイル
 *.exe
 a.out
+*.obj
+*.exe
 
 # rimeが生成する一時ファイル
 *.pyc

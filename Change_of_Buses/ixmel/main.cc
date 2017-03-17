@@ -24,18 +24,17 @@ int main(){
 		int a,b,c,d;
 		cin>>a>>b>>c>>d;
 		a--;b--;
-		in.pb({{c,i},{0,a}});
-		in.pb({{c+d,i},{1,b}});
+		in.pb({{c,0},{i,a}});
+		in.pb({{c+d,-1},{i,b}});
 	}
 	sort(all(in));
-//	rep(i,in.size())cout<<in[i].first<<" "<<in[i].second.first<<" "<<in[i].second.second<<endl;
 	rep(i,in.size()){
-		if(in[i].second.first==0){//hatu
+		if(in[i].first.second==0){//hatu
 			int now=in[i].second.second;
 			if(now==g||dp[now]==pii(inf,inf))continue;
-			bas[in[i].first.second]=in[i].first.first-dp[now].first+dp[now].second;
+			bas[in[i].second.first]=in[i].first.first-dp[now].first+dp[now].second;
 		}else{//tyaku
-			int now=in[i].second.second,t=bas[in[i].first.second];
+			int now=in[i].second.second,t=bas[in[i].second.first];
 			if(now==g){
 				out=min(out,t);
 			}else{//tyaku

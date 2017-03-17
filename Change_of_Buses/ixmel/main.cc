@@ -18,7 +18,7 @@ int main(){
 	s--;g--;
 	vp dp(n,pii(-inf,inf));
 	dp[s]=pii(0,0);
-	vi bas(m);
+	vi bas(m,inf);
 	vip in;
 	rep(i,m){
 		int a,b,c,d;

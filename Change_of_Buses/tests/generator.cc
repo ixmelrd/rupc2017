@@ -54,8 +54,8 @@ void makeP(int p,int n,int s,int g){//printf("PP\n");
     a[i]=i?b[i-1]:s;
     b[i]=(a[i]-1+rnd.next(1,n-1))%n+1;
     if(i)bt=t[i-1]+c[i-1];
-    t[i]=rnd.next(bt,MIN(bt+x,MAX_t));
-    c[i]=rnd.next(MIN_c,MIN(y,MAX_t-t[i]));
+    t[i]=rnd.next(bt,MIN(bt+x,MAX_t-(p-i)));
+    c[i]=rnd.next(MIN_c,MIN(y,MAX_t-t[i]-(p-i)+1));
   }
   if(a[p-1]-g)b[p-1]=g;
 }
@@ -111,7 +111,7 @@ int main(){
     sprintf(c,"52_random_MAX_%02d.in",i);
     makeG(n,m,s,g,c);
   }
-
+  
   tubo28::dence(2, "60_manyedge_N2.in");
   tubo28::dence(3, "60_manyedge_N3.in");
   tubo28::dence(10, "60_manyedge_N10.in");

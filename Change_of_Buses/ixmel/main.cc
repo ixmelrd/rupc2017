@@ -31,7 +31,7 @@ int main(){
 	rep(i,in.size()){
 		if(in[i].first.second==0){//hatu
 			int now=in[i].second.second;
-			if(now==g||dp[now]==pii(inf,inf))continue;
+			if(now==g||dp[now]==pii(-inf,inf))continue;
 			bas[in[i].second.first]=in[i].first.first-dp[now].first+dp[now].second;
 		}else{//tyaku
 			int now=in[i].second.second,t=bas[in[i].second.first];

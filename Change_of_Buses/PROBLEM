@@ -7,6 +7,6 @@
 ##   time_limit: The time limit of this problem in seconds.
 problem(title = "A+B Problem",
         id = "A",
-        #reference_solution = 'Yazaten',
+        reference_solution = 'tubo28',
         time_limit = 1.0,
         )

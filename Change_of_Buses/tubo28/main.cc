@@ -56,57 +56,58 @@ pair<int,int> dec(ll x) {
 }
 
 int main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
     int n, m, s, t;
-    while (cin >> n >> m >> s >> t) {
-        --s; --t;
-        vector<vector<int>> ts(n);
-        vector<tuple<int, int, int, int, int>> es; // (バス停,つく時間), (バス停,つく時間), 濡れる時間
-        ts[s].emplace_back(0);
-        rep (i, m) {
-            int u, v, t, c;
-            cin >> u >> v >> t >> c;
-            --u; --v;
-            es.emplace_back(u, t, v, t + c, 0);
-            ts[u].emplace_back(t);
-            ts[v].emplace_back(t + c);
-        }
-        rep (i, n) {
-            sort(all(ts[i]));
-            rep (j, ts[i].size() - 1) {
-                int t1 = ts[i][j], t2 = ts[i][j+1];
-                es.emplace_back(i, t1, i, t2, t2 - t1);
-            }
-        }
-
-        map<ll, int> mp;
-        for (auto &e : es) {
-            int a, b, c, d;
-            tie(a, b, c, d, ignore) = e;
-            mp[enc(a, b)];
-            mp[enc(c, d)];
-        }
-        int id = 0;
-        for (auto &e : mp) {
-            e.second = id++;
-        }
-
-        Graph g(id);
-        for (auto &e : es){
-            int a, b, c, d, w;
-            tie(a, b, c, d, w) = e;
-            int u = mp[enc(a, b)];
-            int v = mp[enc(c, d)];
-            add_arc(g, u, v, w);
-        }
-
-        vector<Weight> dist = dijkstra(g, mp[enc(s, 0)]);
-
-        int ans = INF;
-        for (auto &e : mp) {
-            int v;
-            tie(v, ignore) = dec(e.first);
-            if (v == t) ans = min(ans, dist[e.second]);
-        }
-        cout << ans << endl;
+    cin >> n >> m >> s >> t;
+    --s; --t;
+    vector<vector<int>> ts(n);
+    vector<tuple<int, int, int, int, int>> es; // (バス停,つく時間), (バス停,つく時間), 濡れる時間
+    ts[s].emplace_back(0);
+    rep (i, m) {
+        int u, v, t, c;
+        cin >> u >> v >> t >> c;
+        --u; --v;
+        es.emplace_back(u, t, v, t + c, 0);
+        ts[u].emplace_back(t);
+        ts[v].emplace_back(t + c);
     }
+    rep (i, n) {
+        sort(all(ts[i]));
+        rep (j, ts[i].size() - 1) {
+            int t1 = ts[i][j], t2 = ts[i][j+1];
+            es.emplace_back(i, t1, i, t2, t2 - t1);
+        }
+    }
+
+    unordered_map<ll, int> mp;
+    for (auto &e : es) {
+        int a, b, c, d;
+        tie(a, b, c, d, ignore) = e;
+        mp[enc(a, b)];
+        mp[enc(c, d)];
+    }
+    int id = 0;
+    for (auto &e : mp) {
+        e.second = id++;
+    }
+
+    Graph g(id);
+    for (auto &e : es){
+        int a, b, c, d, w;
+        tie(a, b, c, d, w) = e;
+        int u = mp[enc(a, b)];
+        int v = mp[enc(c, d)];
+        add_arc(g, u, v, w);
+    }
+
+    vector<Weight> dist = dijkstra(g, mp[enc(s, 0)]);
+
+    int ans = INF;
+    for (auto &e : mp) {
+        int v;
+        tie(v, ignore) = dec(e.first);
+        if (v == t) ans = min(ans, dist[e.second]);
+    }
+    cout << ans << endl;
 }

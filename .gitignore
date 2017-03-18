@@ -16,3 +16,4 @@ rime-out/
 build/
 
 /submission
+.python-version

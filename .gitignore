@@ -15,5 +15,5 @@ __pycache__/
 rime-out/
 build/
 
-/submission
+/submission/data
 .python-version

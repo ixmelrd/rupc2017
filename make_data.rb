@@ -27,3 +27,9 @@ Dir.chdir("submission/data") {
     `mv #{diff} #{diff.sub('.diff', '.out')}`
   }
 }
+
+checker_dir = 'submission/checker/C'
+`mkdir -p #{checker_dir}`
+`cp Tree_Tree/tests/judge.cc #{checker_dir}`
+`cp Tree_Tree/tests/testlib.h #{checker_dir}`
+`cp Tree_Tree/tests/constraints.hpp #{checker_dir}`

@@ -12,49 +12,43 @@
 const int INF = 2000000000;
 using namespace std;
 
-int n;
 int N = 'z' - 'a' + 1;
 
-
+int toDigit(string a){
+    int res = 0;
+    rep(i,a.size()){
+        res *= N;
+        res += a[i] - 'a' + 1;
+    }
+    return res;
+}
 
 int main(){
+    int n;
     cin >> n;
 
-    set<string> m;
+    bool f[500000] = {0};
     string a;
     rep(i,n){
         cin >> a;
+        int len = a.size();
         range(j,1,5){
-            rep(k,a.size()){
-                if(j + k >= a.size()){
-                    m.insert(a.substr(k,a.size() - k));
+            rep(k,len){
+                if(j + k >= len){
+                    f[toDigit(a.substr(k,len - k))] = true;
                 }else{
-                    m.insert(a.substr(k,j));
+                    f[toDigit(a.substr(k,j))] = true;;
                 }
             }
         }
     }
 
-    set<int> s;
-    for(auto it:m) {
-        int res = 0;
-        rep(i,it.size()){
-            res *= N;
-            res += it[i] - 'a' + 1;
-        }
-        s.insert(res);
-    }
-
-
-    int i = 1;
-    auto it = s.begin();
-    while(true){
-        if(i != *it){
+    for(int i = 1; true; i++){
+        if(not f[i]){
             string res = "";
-            int k = N;
             while(true){
                 i--;
-                res += 'a' + i % k;
+                res += 'a' + i % N;
                 i/=N;
                 if(i == 0) break;
             }
@@ -62,8 +56,6 @@ int main(){
             cout << res << endl;
             return 0;
         }
-        i++;
-        it++;
     }
     return 0;
 }

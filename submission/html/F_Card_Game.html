@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>F</title>
+<link rel="stylesheet" href="css/description.css" type="text/css" />
+</head>
+<body>
+
+<!-- - - - - - begin nicebody - - - - - -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<h1>F: カードゲーム</h1>
+
+<h2>問題</h2>
+<p>
+カードを使ったゲームを $Q$ 回行います。
+カードには $1 \cdots N$ の数が書かれており、各数が書かれたカードはゲームを行うのに十分な枚数があります。
+$i$ 回目のゲームでは、はじめに手札として 2 枚のカードが配られます。
+それぞれのカードに書かれている数字は $x_i$ と $y_i$ です。
+カードはルールに従って交換することができます。
+$j$ 番目 $(1 \le j \le M)$ のルールでは、カード $a_j$ を手数料 $c_j$ 円で別のカード $b_j$ に交換することができます。
+各ルールは何回でも用いることができます。また、手数料が足りなくて交換できない場合はありません。
+最後に、手札のカードの数字を $R$ で割ったあまりが等しい時、報酬として $z_i$ 円受け取ります。
+異なる場合報酬は $0$ 円です。
+</p>
+<p>
+$Q$ 回ゲームを終えた時に増やすことのできるお金の最大値を求めてください。
+</p>
+
+<h2>制約</h2>
+<ul>
+<li>$1 \le N \le 10^5$</li>
+<li>$0 \le M \le \min(2 \times 10^5, N\times(N-1))$</li>
+<li>$2 \le R \le 10$</li>
+<li>$1 \le Q \le 10^5$</li>
+<li>$1 \le a_j, b_j \le N$</li>
+<li>$a_j \neq b_j$</li>
+<li>$0 \le c_j \le 10^5$</li>
+<li>$1 \le x_i, y_i \le N$</li>
+<li>$0 \le z_i \le 10^5$</li>
+</ul>
+
+<h2>入力</h2>
+<p>
+入力は以下の形式で標準入力から与えられます。
+</p>
+<p>
+$N \ M \ R \ Q$<br>
+$a_1 \ b_1 \ c_1$<br>
+$\vdots$<br>
+$a_M \ b_M \ c_M$<br>
+$x_1 \ y_1 \ z_1$<br>
+$\vdots$<br>
+$x_Q \ y_Q \ z_Q$
+</p>
+
+<h2>出力</h2>
+<p>
+ゲームを $Q$ 回行ったときに増やすことのできるお金の最大値を 1 行で出力してください。また、末尾に改行も出力してください。
+</p>
+
+<h2>サンプル</h2>
+
+<h3>入力例 1</h3>
+<pre>
+4 4 2 1
+1 2 1
+2 3 1
+3 4 5
+4 1 7
+1 4 5
+</pre>
+<h3>出力例 1</h3>
+<pre>
+4
+</pre>
+<p>
+カード 1 を手数料 1 でカード 2 に交換すると手札のカードを 2 で割った時のあまりがどちらも 0 となります。
+得られる報酬は 5 であるため、増やせるお金は $5-1=4$ です。
+</p>
+
+<h3>入力例 2</h3>
+<pre>
+4 4 2 1
+1 2 1
+2 3 1
+3 4 5
+4 1 7
+3 4 2
+</pre>
+<h3>出力例 2</h3>
+<pre>
+0
+</pre>
+<p>
+カードの交換での手数料が報酬よりも多いので、交換を行わないのが最適です。
+</p>
+
+<!-- - - - - - end nicebody - - - - - -->
+
+</body>
+</html>

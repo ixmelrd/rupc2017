@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>F</title>
+<link rel="stylesheet" href="css/description.css" type="text/css" />
+</head>
+<body>
+
+<!-- - - - - - begin nicebody - - - - - -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<h1>K: AORイカちゃんの成績</h1>
+
+<h2>問題</h2>
+<p>
+AORイカちゃんは $N$ 回のレポートの点数のみで成績が決まる授業を受けている。
+
+AORイカちゃんは同じ授業を受けている友達が $M$ 人いて、自分が苦手なテーマのレポートは、そのテーマが得意な友達のレポートを写すことで、その友達と同じ点数を取ることができる。
+
+ただし、他人のレポートを写していることを先生に気付かれてはいけないので、 $N$ 回のうち少なくともK回は他人のレポートを写さず、自力でレポートを仕上げなくてはならない。
+また、AORイカちゃんは友達に迷惑をかけたくないと思ったので友達 $i$ に対してレポートを写すのは $T_i$ 回以下にすることにした。
+
+AORイカちゃんが自力でレポートを仕上げたときの点数と、友達がレポートを仕上げた時の点数が与えられたときに、AORイカちゃんが取ることのできる合計点数の最大値を答えよ。
+</p>
+
+
+<h2>制約</h2>
+<ul>
+<li>$1 \le N \le 100$</li>
+<li>$0 \le M \le 100$</li>
+<li>$0 \le K \le N$</li>
+<li>$0 \le a_i \le 100$</li>
+<li>$0 \le b_{ij} \le 100$</li>
+<li>$0 \le T_i \le N$</li>
+</ul>
+
+
+<h2>入力</h2>
+<p>
+入力は以下の形式で標準入力から与えられます。
+</p>
+<p>
+$N \ M \ K$<br>
+$a_1 \ \cdots \ a_N$<br>
+$b_{11} \ \cdots \ b_{1N}$<br>
+$\vdots$<br>
+$b_{M1} \ \cdots \ b_{MN}$<br>
+$T_1 \ \cdots \ T_M$<br>
+</p>
+
+<h2>出力</h2>
+<p>
+AORイカちゃんが取ることのできる合計点数の最大値を出力せよ。また、末尾に改行も出力せよ。
+</p>
+
+<h2>サンプル</h2>
+
+<h3>入力例 1</h3>
+<pre>
+3 2 2
+50 65 70
+80 100 80
+90 65 45
+1 1
+</pre>
+<h3>出力例 1</h3>
+<pre>
+225
+</pre>
+<p>
+AORイカちゃんは 1 回だけ他人のレポートを写すことができるので、友達 2 の 1 つめのレポートを写すことで、AORイカちゃんは最高点数を取ることができる。
+</p>
+
+<h3>入力例 2</h3>
+<pre>
+3 0 3
+0 0 0
+</pre>
+<h3>出力例 2</h3>
+<pre>
+0
+</pre>
+<p>
+AORイカちゃんには友達がいないため、レポートを写すことはできません。
+</p>
+
+<!-- - - - - - end nicebody - - - - - -->
+
+</body>
+</html>

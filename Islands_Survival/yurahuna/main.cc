@@ -40,8 +40,6 @@ using Graph = vector<vector<edge>>;
 
 // reach[v] = 各頂点に到達可能な最小の時刻
 
-
-
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);

@@ -10,6 +10,7 @@ const int MAX = 250010;
 const int MAX_LOG = 20;
 int nxt[MAX_LOG + 1][MAX];	// nxt[i][j]	= マス j から 2^i 回ジャンプして行き着くマス
 int src[MAX];				// src[i]		= i 番目の人の初期位置
+bool used[MAX];				// used[j]		=マス j に既に人がいるか
 
 int H, W, N;
 

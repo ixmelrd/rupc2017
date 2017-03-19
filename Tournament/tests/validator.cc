@@ -1,12 +1,28 @@
 #include "./testlib.h"
 #include "./constraints.hpp"
 #include <cassert>
+#include <algorithm>
+using namespace std;
+
+int popcount(int n) {
+    return n ? popcount(n/2) + n%2 : 0;
+}
 
 int main(){
     registerValidation();
-    inf.readInt(MIN_A, MAX_A);
+    int N = inf.readInt(MIN_N, MAX_N);
+    assert(popcount(N) == 1);
     inf.readSpace();
-    inf.readInt(MIN_B, MAX_B);
+    int M = inf.readInt(MIN_M, min(N - 1, MAX_M));
     inf.readEoln();
+    vector<int> a(M);
+    for (int i = 0; i < M; ++i) {
+        a[i] = inf.readInt(1, N);
+        inf.readEoln();
+    }
+    sort(a.begin(), a.end());
+    for (int i = 1; i < M; ++i) {
+        assert(a[i] != a[i-1]);
+    }
     inf.readEof();
 }

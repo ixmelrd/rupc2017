@@ -24,22 +24,22 @@ int main(){
     // pidを足すことで、1秒以上間を置かずに起動したときに同じシードになってしまうのを防ぐ
     rnd.setSeed(time(0)+getpid());
 
-    // 乱数ケースを10個生成
-    for(int i = 0; i < 10; ++i){
-        int A = rnd.next(MIN_A, MAX_A);
-        int B = rnd.next(MIN_B, MAX_B);
-        output(A, B, "50_random", i);
-    }
+    // // 乱数ケースを10個生成
+    // for(int i = 0; i < 10; ++i){
+    //     int A = rnd.next(MIN_A, MAX_A);
+    //     int B = rnd.next(MIN_B, MAX_B);
+    //     output(A, B, "50_random", i);
+    // }
 
-    // 片方が大きいケースを生成
-    for(int i = 0; i < 10; ++i){
-        int A = 1;
-        int B = 1;
-        while(0.5*A <= B && B <= 1.5*A){
-            A = rnd.next(MIN_A, MAX_A);
-            B = rnd.next(MIN_B, MAX_B);
-        }
-        if(rnd.next(0,1)) swap(A, B);
-        output(A, B, "60_unbalance", i);
-    }
+    // // 片方が大きいケースを生成
+    // for(int i = 0; i < 10; ++i){
+    //     int A = 1;
+    //     int B = 1;
+    //     while(0.5*A <= B && B <= 1.5*A){
+    //         A = rnd.next(MIN_A, MAX_A);
+    //         B = rnd.next(MIN_B, MAX_B);
+    //     }
+    //     if(rnd.next(0,1)) swap(A, B);
+    //     output(A, B, "60_unbalance", i);
+    // }
 }

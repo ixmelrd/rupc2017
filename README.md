@@ -79,6 +79,6 @@ $ rime test
 
 - [作問ツールの使い方](https://drive.google.com/file/d/0B8nawKhBgu7IV0hTcnNMUEhqb2c/view?usp=sharing)
 - [Google Drive](https://drive.google.com/drive/folders/0B8nawKhBgu7IZ2xXeHY1bWJ4MDg)
-- [Rime 1.0 documentation](http://nya3jp.github.io/rime/)
+- [Rime 1.0 documentation](https://rime.readthedocs.io/ja/latest/)
 - [testlib](http://codeforces.com/testlib)
 - [競技プログラミングの作問進行法](http://itohjam.hatenablog.com/entry/2014/12/02/214019)

@@ -12,10 +12,9 @@
 const int INF = 2000000000;
 using namespace std;
 
-int n;
 int N = 'z' - 'a' + 1;
 
-int convertTo27Decimal(string a){
+int toDigit(string a){
     int res = 0;
     rep(i,a.size()){
         res *= N;
@@ -24,57 +23,39 @@ int convertTo27Decimal(string a){
     return res;
 }
 
-string convertToString(int a){
-    string res = "";
-    int k = N;
-    while(true){
-        a--;
-        res += 'a' + a % k;
-        a/=N;
-        if(a == 0) break;
-    }
-    reverse(all(res));
-    return res;
-}
+int main(){
+    int n;
+    cin >> n;
 
-string findPassword(set<int> s){
-    int i = 1;
-    auto it = s.begin();
-    while(true){
-        if(i != *it){
-            return convertToString(i);
-        }
-        i++;
-        it++;
-    }
-    return "error";
-}
-
-inline void partialStringToMap(map<string, bool> &m, string a){
-    range(j,1,5){
-        rep(k,a.size()){
-            if(j + k >= a.size()){
-                m[a.substr(k,a.size() - k)] = true;
-            }else{
-                m[a.substr(k,j)] = true;
+    bool f[500000] = {0};
+    string a;
+    rep(i,n){
+        cin >> a;
+        int len = a.size();
+        range(j,1,5){
+            rep(k,len){
+                if(j + k >= len){
+                    f[toDigit(a.substr(k,len - k))] = true;
+                }else{
+                    f[toDigit(a.substr(k,j))] = true;;
+                }
             }
         }
     }
-}
 
-int main(){
-    cin >> n;
-
-    map<string, bool> m;
-    rep(i,n){
-        string a;
-        cin >> a;
-        partialStringToMap(m,a);
+    for(int i = 1; true; i++){
+        if(not f[i]){
+            string res = "";
+            while(true){
+                i--;
+                res += 'a' + i % N;
+                i/=N;
+                if(i == 0) break;
+            }
+            reverse(all(res));
+            cout << res << endl;
+            return 0;
+        }
     }
-
-    set<int> s;
-    for(auto it:m) s.insert(convertTo27Decimal(it.first));
-    cout << findPassword(s) << endl;
-
     return 0;
 }

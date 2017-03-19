@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>C</title>
+<link rel="stylesheet" href="css/description.css" type="text/css" />
+</head>
+<body>
+
+<!-- - - - - - begin nicebody - - - - - -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<h1>I: Islands Survival</h1>
+
+<h2>問題</h2>
+<p>
+ $N$ 頂点 $M$ 辺の単純連結無向グラフがある．
+頂点には $1, 2, \cdots, N$ と番号がつけられている．
+辺には $1, 2, \cdots, M$ と番号がつけられており，辺 $i$ は頂点 $a_i$ と $b_i$ をつないでいる．
+また，辺 $i$ は時刻 $t_i$ に消える．どの辺も通過するために単位時間がかかる．
+
+あなたは最初，時刻 0 において頂点 1 にいる．
+あなたは最適に行動することで，時刻 $T$ までに得られるスコアを最大化したい．
+スコアは最初 0 であり，イベントは以下に従って起きる．
+</p>
+
+<ol>
+    <li>今の時刻 $t'$ が $t' \geq T$ を満たすならば終了する．そうでなければ 2. へ．</li>
+    <li>$t_i = t'$ なるすべての辺 $i$ が消える．</li>
+    <li>あなたがいる頂点を $v$ とするとき，頂点 $v$ を含む連結成分に含まれる頂点数を $x$ とすると，スコアに $x$ が加算される．</li>
+
+    <li>あなたは頂点 $v$ と隣接している頂点のいずれかに移動するか，頂点 $v$ に留まる．ただし前者の場合，既に消えた辺を使うことはできない．</li>
+
+    <li>$t' \gets t' + 1$ として 1. へ．</li>
+</ol>
+
+<p>
+得られるスコアの最大値を求めよ．
+</p>
+
+
+<h2>制約</h2>
+<ul>
+<li>$2 \le N \le 10^5$</li>
+<li>$N - 1 \le M \le min(2 * 10^5, N(N - 1) / 2)$</li>
+<li>$1 \le T \le 10^5$</li>
+<li>$1 \le a_i , b_i \le N$</li>
+<li>$1 \le t_i \le T$</li>
+<li>与えられるグラフは単純かつ連結．</li>
+</ul>
+
+<h2>入力形式</h2>
+<p>
+入力は以下の形式で与えられる．
+</p>
+<p>
+$N \ M \ T$<br>
+$a_1 \ b_1 \ t_1$<br>
+$\vdots$<br>
+$a_M \ b_M \ t_M$<br>
+</p>
+
+<h2>出力</h2>
+<p>
+スコアの最大値を出力せよ．また，末尾に改行も出力せよ．
+</p>
+
+<h2>サンプル</h2>
+
+<h3>サンプル入力1</h3>
+<pre>
+5 4 2
+1 2 2
+2 3 1
+1 4 2
+4 5 1
+</pre>
+<h3>サンプル出力1</h3>
+<pre>
+8
+</pre>
+
+<p>
+時刻 0 に 5，時刻 1 に 3 のスコアを得られる．
+</p>
+
+<p>
+<img src="image/Tree_SurvivalTestCase.001.jpeg" width="30%" height="30%">
+<img src="image/Tree_SurvivalTestCase.002.jpeg" width="30%" height="30%">
+</p>
+
+<h3>サンプル入力2</h3>
+<pre>
+4 4 3
+1 2 2
+2 3 1
+3 4 3
+4 1 1
+</pre>
+
+<h3>サンプル出力2</h3>
+
+<pre>
+8
+</pre>
+
+<p>
+時刻 0 に 4，時刻 1 に 2，時刻 2 に 2 のスコアを得られる．
+</p>
+<!-- - - - - - end nicebody - - - - - -->
+
+</body>
+</html>

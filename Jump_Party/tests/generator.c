@@ -25,11 +25,11 @@ void Challenge00(){
   int i,j,k=1;
   fprintf(f,"%d %d 2\n",MAX_H,MAX_W);
   for(i=0;i<MAX_H;i++){
-    for(j=1;j<MAX_W;j++)fprintf(f,"%d %d ",j,i);
-    if(i==MAX_H-1)fprintf(f,"%d %d\n",MAX_W-1,MAX_H-1);
-    else          fprintf(f,"0 %d\n",i+1);
+    for(j=1;j<MAX_W;j++)fprintf(f,"%d %d ",i,j);
+    if(i==MAX_H-1)fprintf(f,"%d %d\n",MAX_H-1,MAX_W-1);
+    else          fprintf(f,"%d 0\n",i+1);
   }
-  fprintf(f,"0 0\n1 0\n");
+  fprintf(f,"0 0\n0 1\n");
   fclose(f);
 }
 void Challenge01(){
@@ -37,8 +37,8 @@ void Challenge01(){
   int i,j,k=1;
   fprintf(f,"%d %d %d\n",MAX_H,MAX_W,MAX_H*MAX_W);
   for(i=0;i<MAX_H;i++){
-    fprintf(f,"0 %d",i);
-    for(j=1;j<MAX_W;j++)fprintf(f," %d %d",j,i);
+    fprintf(f,"%d 0",i);
+    for(j=1;j<MAX_W;j++)fprintf(f," %d %d",i,j);
     fprintf(f,"\n");
   }
   for(i=0;i<MAX_H*MAX_W;i++)fprintf(f,"%d %d\n",i/MAX_W,i%MAX_W);
@@ -47,6 +47,20 @@ void Challenge01(){
 void Challenge02(){
   char s[100]={"60_Challenge_02.in"};
   MakeGrid(MAX_H,MAX_W,1,s);
+}
+void Challenge03(){
+  FILE *f=fopen("60_Challenge_03.in","w");
+  int i,j;
+  fprintf(f,"%d %d %d\n",MAX_H,MAX_W,MAX_H*MAX_W);
+  for(i=0;i<MAX_H;i++){
+    for(j=0;j<MAX_W;j++){
+      if(j)fprintf(f," ");
+      fprintf(f,"%d %d",i,j%2?j-1:j+1);
+    }
+    fprintf(f,"\n");
+  }
+  for(i=0;i<MAX_H*MAX_W;i++)fprintf(f,"%d %d\n",i/MAX_W,i%MAX_W);
+  fclose(f);
 }
 int MIN(int a,int b){return a<b?a:b;}
       
@@ -91,6 +105,6 @@ int main(){
   Challenge00();
   Challenge01();
   Challenge02();
+  Challenge03();
   return 0;
-
 }

@@ -1,4 +1,5 @@
 #include<iostream>
+#include<cstdio>
 #include<vector>
 #define loop(i,a,b) for(int i=a;i<b;i++) 
 #define rep(i,a) loop(i,0,a)
@@ -7,18 +8,21 @@ typedef vector<int> vi;
 typedef vector<vi> vvi;
 int main(){
 	int n,m,q;
-	cin>>n>>m>>q;
+//	cin>>n>>m>>q;
+	scanf("%d %d %d",&n,&m,&q);
 	n*=m;
 	vvi in(18,vi(n));
 	rep(i,n){
 		int a,b;
-		cin>>a>>b;
+//		cin>>a>>b;
+		scanf("%d %d",&a,&b);
 		in[0][i]=a*m+b;
 	}
 	vi hu(q);
 	rep(i,q){
 		int a,b;
-		cin>>a>>b;
+//		cin>>a>>b;
+		scanf("%d %d",&a,&b);
 		hu[i]=a*m+b;
 	}
 	rep(i,17)rep(j,n)in[i+1][j]=in[i][in[i][j]];
@@ -41,7 +45,8 @@ int main(){
 		else r=h;
 	}
 	if(r==n)r=-1;
-	cout<<r<<endl;
+//	cout<<r<<endl;
+	printf("%d\n",r);
 }
 
 

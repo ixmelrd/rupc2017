@@ -26,33 +26,32 @@ struct uf_tree {
 
 struct node {
     int find, size, time;
-    vector<node*> ch;
-    node(int f, int s, int t, vector<node*> c)
-        : find(f), size(s), time(t), ch(c) {}
+    node *ch[2];
+    node(int f, int s, int t, node *left, node *right)
+        : find(f), size(s), time(t) {
+        ch[0] = left;
+        ch[1] = right;
+    }
     node() {}
     void *operator new(size_t) {
-        static node pool[2000100];
+        static node pool[300010];
         static node *p = pool;
         return p++;
     }
 };
 
 using np = node*;
-
 const int INF = 1e18;
-
 using edge = tuple<int,int,int>;
+
 int N, M, K, T;
-edge edges[100010];
-np uf_state[100010];
-map<int,vector<edge>> events;
 vector<edge> g[100010];
 
 int dist[100010];
 
 int dfs(np n, int cur){
     int ans;
-    if(n->ch.size()){
+    if(n->ch[0]){
         ans = -INF;
         for(auto &c : n->ch){
             int cand = (n->time - cur) * n->size + dfs(c, n->time);
@@ -64,59 +63,34 @@ int dfs(np n, int cur){
     return ans;
 }
 
-void show(np n, int d = 0){
-    cout << string(d, ' ') << "root:" << n->find << " size:" << n->size << " time:" << n->time << endl;
-    for(auto &c : n->ch){
-        cout << string(d, ' ') << "(\n";
-        show(c, d+2);
-        cout << string(d, ' ') << ")\n";
-    }
-}
-
 signed main(){
+    cin.tie(0);
+    ios::sync_with_stdio(0);
     cin >> N >> M >> T;
+    vector<tuple<int,int,int>> edges;
     rep(i, M){
         int a, b, t;
         cin >> a >> b >> t;
         --a; --b;
         g[a].emplace_back(a, b, t);
         g[b].emplace_back(b, a, t);
-        events[-t].emplace_back(t, a, b);
+        edges.emplace_back(t, a, b);
     }
 
+    vector<np> uf_state(N);
     uf_tree uf(N);
-    rep(i, N) uf_state[i] = new node(i, 1, T, {}); // 時間Tですべての辺が消えると考える
+    rep(i, N) uf_state[i] = new node(i, 1, T, nullptr, nullptr); // 時間Tですべての辺が消えると考える
 
-    // もっときれいな実装方法があると思う
-    vector<np> org(N);
-    for(auto &ev : events){
-        static map<int, set<np>> collect;
-        collect.clear();
-
-        int cur = -ev.first;
-        auto &es = ev.second;
-        for(auto &e : es){
-            int t, a, b;
-            tie(t, a, b) = e;
-            org[a] = uf_state[uf.find(a)];
-            org[b] = uf_state[uf.find(b)];
-        }
-        for(auto &e : es){
-            int t, a, b;
-            tie(t, a, b) = e;
-            uf.unite(a, b);
-        }
-        for(auto &e : es){
-            int t, a, b;
-            tie(t, a, b) = e;
-            collect[uf.find(a)].insert(org[a]);
-            collect[uf.find(b)].insert(org[b]);
-        }
-        for(auto &e : collect){
-            int v = e.first;
-            uf_state[v] = new node(v, uf.size(v), cur, vector<np>(all(e.second)));
-            // show(uf_state[v]);
-        }
+    sort(all(edges));
+    reverse(all(edges));
+    for(auto &e : edges){
+        int t, a, b;
+        tie(t, a, b) = e;
+        if (uf.is_same(a, b)) continue;
+        np org_a = uf_state[uf.find(a)];
+        np org_b = uf_state[uf.find(b)];
+        uf.unite(a, b);
+        uf_state[uf.find(a)] = new node(uf.find(a), uf.size(a), t, org_a, org_b);
     }
 
     fill(dist, dist + N, INF);
@@ -136,6 +110,5 @@ signed main(){
         }
     }
 
-    // show(uf_state[uf.find(0)]);
     cout << dfs(uf_state[uf.find(0)], 0) << endl;
 }

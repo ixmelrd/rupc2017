@@ -2,12 +2,12 @@
 
 problems = [
   'Tournament',
-  'Range_Num',
-  'Tree_Tree',
+  'Weight_Range',
+  'Fractal_Tree',
   'Password',
   'Graduation_Ceremony',
   'Card_Game',
-  'Change_of_Buses',
+  'Rainy_Bus_Stops',
   'Jump_Party',
   'Islands_Survival',
   'Energy_Drink',
@@ -29,8 +29,8 @@ Dir.chdir("submission/data") {
   }
 }
 
-checker_dir = 'submission/checker/C'
+checker_dir = 'submission/checker/C_Fractal_Tree'
 `mkdir -p #{checker_dir}`
-`cp Tree_Tree/tests/judge.cc #{checker_dir}`
-`cp Tree_Tree/tests/testlib.h #{checker_dir}`
-`cp Tree_Tree/tests/constraints.hpp #{checker_dir}`
+`cp Fractal_Tree/tests/judge.cc #{checker_dir}`
+`cp Fractal_Tree/tests/testlib.h #{checker_dir}`
+`cp Fractal_Tree/tests/constraints.hpp #{checker_dir}`

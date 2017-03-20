@@ -80,6 +80,13 @@ int main(){
     sprintf(s,"52_random_MAX_%02d.in",i);
     MakeGrid(h,w,n,s);
   }
+  for(i=0;i<10;i++){
+    h=rnd.next(2,MAX_H);
+    w=rnd.next(2,MAX_W);
+    n=rnd.next(MIN(20,h*w),MIN(60,h*w));
+    sprintf(s,"53_random_N_small_%02d.in",i);
+    MakeGrid(h,w,n,s);
+  }
   //コーナーケース
   Challenge00();
   Challenge01();

@@ -43,9 +43,11 @@ $i$ 番目の参加者の初期位置は $(R_i, C_i)$ であり、$(i,j)$ のグ
 
 <h2>制約</h2>
 <ul>
-<li>$1 \le N \le 1000$</li>
-<li>$1 \le M \le N$</li>
-<li>$0 \le A_i \le 100$</li>
+<li>$1 \le H,W \le 500$</li>
+<li>$0 \le N \le H \times W$</li>
+<li>$0 \le r_{ij} < H$</li>
+<li>$0 \le c_{ij} < W$</li>
+<li>参加者の初期位置は相違なる</li>
 </ul>
 
 <h2>入力形式</h2>
@@ -60,6 +62,10 @@ $r_{H-1 \ 0} \ c_{H-1 \ 0} \ \cdots \ r_{H-1 \ W-1} \ c_{H-1 \ W-1}$<br>
 $R_0 \ C_0$<br>
 $\vdots$<br>
 $R_{N-1} \ C_{N-1}$<br>
+</p>
+<p>
+この問題では入力ファイルが非常に大きくなることがあることに注意せよ。
+C++ なら<a href="http://qnighy.hatenablog.com/entry/20110115/1295054750">このページ</a>を参考にすると良いかもしれない。
 </p>
 
 <h2>出力</h2>

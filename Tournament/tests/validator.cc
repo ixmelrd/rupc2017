@@ -13,11 +13,11 @@ int main(){
     int N = inf.readInt(MIN_N, MAX_N);
     assert(popcount(N) == 1);
     inf.readSpace();
-    int M = inf.readInt(MIN_M, min(N - 1, MAX_M));
+    int M = inf.readInt(MIN_M, N);
     inf.readEoln();
     vector<int> a(M);
     for (int i = 0; i < M; ++i) {
-        a[i] = inf.readInt(1, N);
+        a[i] = inf.readInt(0, N - 1);
         inf.readEoln();
     }
     sort(a.begin(), a.end());

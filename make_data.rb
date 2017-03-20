@@ -17,9 +17,10 @@ problems = [
 problems.zip('A'..'Z').each { |p, s|
   input  = Dir.glob("#{p}/rime-out/tests/*.in")
   output = Dir.glob("#{p}/rime-out/tests/*.diff")
-  `mkdir -p submission/data/#{s}`
-  `cp #{input.join " "} submission/data/#{s}`
-  `cp #{output.join " "} submission/data/#{s}`
+  dst_dir = "submission/data/#{s}_#{p}"
+  `mkdir -p #{dst_dir}`
+  `cp #{input.join " "} #{dst_dir}`
+  `cp #{output.join " "} #{dst_dir}`
 }
 
 Dir.chdir("submission/data") {

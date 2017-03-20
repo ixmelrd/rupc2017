@@ -54,8 +54,8 @@ int main(){
         }
     }();
 
-    map<string, set<int>> prfx_mp[4]; // prefix -> indicies of string
-    map<string, set<int>> sffx_mp[4]; // suffix -> indicies of string
+    map<string, set<int>> prfx_mp[4]; // prefix -> indices of string
+    map<string, set<int>> sffx_mp[4]; // suffix -> indices of string
     rep(i, must.size()) {
         rep1(l, 3) {
             string &s = must[i];

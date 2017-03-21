@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>H</title>
+<link rel="stylesheet" href="css/description.css" type="text/css" />
+</head>
+<body>
+
+<!-- - - - - - begin nicebody - - - - - -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<h1>H: ジャンプパーティ</h1>
+
+<h2>問題</h2>
+<p>
+とあるダンスホールで $N$ 人の参加するダンスパーティーが行われる。
+そのダンスホールは縦方向に $H$ 個、横方向に $W$ 個のグリッドに分けられており、
+左上を $(0,0)$、上から $r$ マス、左から $c$ マス目のグリッドの座標を $(r,c)$ と表す。
+$i$ 番目の参加者の初期位置は $(R_i, C_i)$ であり、$(i,j)$ のグリッドには $(r_{ij}, c_{ij})$ が書かれている。
+</p>
+
+<p>
+各参加者は、無限に続く音楽に合わせて次のように同時に移動を行う。
+</p>
+<ul>
+<li>その時にいる座標が $(i,j)$ のとき、$(r_{ij}, c_{ij})$ へジャンプで移動する。</li>
+</ul>
+
+<p>
+それぞれのグリッドは狭く、2 人以上の参加者が同時に同じグリッドに移動すると衝突してしまう。ただし、空中で衝突することは無いとする。
+これを聞いたあなたは、ジャンプ後に 2 人以上の参加者が衝突してしまわないかと心配になった。
+そこで、衝突が起こる可能性があるか、あるならば何回目のジャンプの後に衝突が起こるかを求めることにした。
+</p>
+
+<h2>制約</h2>
+<ul>
+<li>$1 \le H,W \le 500$</li>
+<li>$0 \le N \le H \times W$</li>
+<li>$0 \le r_{ij} < H \ (0 \le i < H, 0 \le j < W)$</li>
+<li>$0 \le c_{ij} < W \ (0 \le i < H, 0 \le j < W)$</li>
+<li>$0 \le R_i < H \ (0 \le i < N)$</li>
+<li>$0 \le C_i < W \ (0 \le i < N)$</li>
+<li>参加者の初期位置は相異なる</li>
+</ul>
+
+<h2>入力形式</h2>
+<p>
+入力は以下の形式で与えられる。
+</p>
+<p>
+$H \ W \ N$<br>
+$r_{00} \ c_{00} \ \cdots \ r_{0 \ W-1} \ c_{0 \ W-1}$<br>
+$\vdots$<br>
+$r_{H-1 \ 0} \ c_{H-1 \ 0} \ \cdots \ r_{H-1 \ W-1} \ c_{H-1 \ W-1}$<br>
+$R_0 \ C_0$<br>
+$\vdots$<br>
+$R_{N-1} \ C_{N-1}$<br>
+</p>
+<p>
+この問題では入力ファイルが非常に大きくなることがあることに注意せよ。
+C++ なら<a href="http://qnighy.hatenablog.com/entry/20110115/1295054750">このページ</a>を参考にすると良いかもしれない。
+</p>
+
+<h2>出力</h2>
+<p>
+衝突が起こる場合は何回目のジャンプの後に起こるかを 1 行で出力せよ。
+そうでない場合は -1 を出力せよ。
+また、末尾に改行を出力せよ。
+</p>
+
+<h2>サンプル</h2>
+
+<h3>サンプル入力 1</h3>
+<pre>
+2 2 2
+1 0 0 1
+0 0 1 0
+0 0
+0 1
+</pre>
+<h3>サンプル出力 1</h3>
+<pre>
+-1
+</pre>
+
+<h3>サンプル入力 2</h3>
+<pre>
+2 2 2
+1 0 0 1
+0 0 1 0
+0 0
+1 1
+</pre>
+<h3>サンプル出力 2</h3>
+<pre>
+1
+</pre>
+
+<!-- - - - - - end nicebody - - - - - -->
+
+</body>
+</html>

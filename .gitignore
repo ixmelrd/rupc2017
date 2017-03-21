@@ -16,4 +16,6 @@ rime-out/
 build/
 
 /submission/data
+/submission/checker
+
 .python-version

@@ -8,7 +8,7 @@ signed main(void){
 	b=(b>a[(judge+i)%n])?b:a[(judge+i)%n];
 	c=(c<a[(judge+i)%n])?c:a[(judge+i)%n];
 	}
-      sum+=b;
+      sum+=b-c;
       judge+=i;
     }while(judge%n);
   printf("%d\n",sum);

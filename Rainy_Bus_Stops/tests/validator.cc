@@ -71,6 +71,7 @@ int main(){
     	inf.readInt(MIN_c,MAX_c);
 		inf.readEoln();
     	u--,v--;
+        assert(u != v);
     	graph[u].pb(edge{v,0});
     }
 
